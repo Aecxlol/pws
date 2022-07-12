@@ -1,0 +1,17 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {# MENU #}
+    {{ include('/partials/menu.html.twig') }}
+
+    {# MAIN SECTION #}
+    {{ include('/partials/main-section.html.twig') }}
+
+    {# ABOUT SECTION #}
+    {{ include('/partials/about-section.html.twig') }}
+
+    {# FOOTER #}
+    {{ include('/partials/footer.html.twig') }}
+{% endblock %}
