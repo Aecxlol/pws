@@ -4,6 +4,14 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+  app.admin_path: '/KrfRpoKb1HATO6EN4V4E'
+  app.login_path: '/MZzBU6EbJ31wZeehonk5'
+  app.name: 'Portfolio de Damien A.'
+
+when@dev:
+    parameters:
+        app.admin_path: '/admin'
+        app.login_path: '/login'
 
 services:
     # default configuration for services in *this* file
