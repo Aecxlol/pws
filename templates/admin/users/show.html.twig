@@ -22,7 +22,9 @@
                     <td>{{ user.roles[0] }}</td>
                     <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date }}</time></td>
                     <td><a href="{{ path('app_admin_users_edit', { userName: user.name }) }}">Éditer</a></td>
-                    <td><a href="#">Supprimer</a></td>
+                    {% if user.roles[0] != 'ROLE_ADMIN' %}
+                        <td><a href="{{ path('app_admin_users_delete', { id: user.id }) }}">Supprimer</a></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </table>

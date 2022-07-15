@@ -62,4 +62,21 @@ class UsersController extends AbstractController
 
         return $this->render('admin/users/edit.html.twig', compact('user'));
     }
+
+    /**
+     * @param int $id
+     * @return Response
+     * @throws NonUniqueResultExceptionj
+     */
+    #[Route('/admin/users/delete/{id}', name: 'app_admin_users_delete', methods: 'GET')]
+    public function delete(int $id): Response
+    {
+        $user = $this->userRepository->findOneByUserId($id);
+
+        $this->userRepository->remove($user, flush: true);
+
+        $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
+
+        return $this->redirectToRoute('app_admin_users');
+    }
 }
