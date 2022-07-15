@@ -1,0 +1,31 @@
+{% extends 'layouts/admin/base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <div>
+        <table class="table">
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Role</th>
+                <th>Créé le</th>
+                <th></th>
+                <th></th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.password }}</td>
+                    <td>{{ user.roles[0] }}</td>
+                    <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date }}</time></td>
+                    <td><a href="{{ path('app_admin_users_edit', { userName: user.name }) }}">Éditer</a></td>
+                    <td><a href="#">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button><a href="{{ path('app_admin_users_create') }}">ADD</a></button>
+    </div>
+{% endblock %}

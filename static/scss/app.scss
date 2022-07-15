@@ -1,3 +1,9 @@
-@import "pages/main";
-@import "pages/about";
-@import "pages/menu";
+// SECTION
+@use "pages/_main";
+@use "pages/_about";
+@use "pages/_menu";
+
+// COMPONENTS
+@use "components/_table";
+@use "components/_link";
+@use "components/_list";

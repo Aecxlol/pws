@@ -6,6 +6,9 @@
             <li><a href="#">compétences</a></li>
             <li><a href="#">portfolio</a></li>
             <li><a href="#">contact</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('app_admin_dashboard') }}">administration</a></li>
+            {% endif %}
         </ul>
     </nav>
 </header>

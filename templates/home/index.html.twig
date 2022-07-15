@@ -3,15 +3,16 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+    {{ dump(app) }}
     {# MENU #}
-    {{ include('/partials/menu.html.twig') }}
+    {{ include('/partials/_menu.html.twig') }}
 
     {# MAIN SECTION #}
-    {{ include('/partials/main-section.html.twig') }}
+    {{ include('/partials/_main_section.html.twig') }}
 
     {# ABOUT SECTION #}
-    {{ include('/partials/about-section.html.twig') }}
+    {{ include('/partials/_about_section.html.twig') }}
 
     {# FOOTER #}
-    {{ include('/partials/footer.html.twig') }}
+    {{ include('/partials/_footer.html.twig') }}
 {% endblock %}
