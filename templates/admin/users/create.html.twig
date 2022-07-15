@@ -5,5 +5,8 @@
 {% block body %}
     <h1>Ajouter un utilisateur</h1>
 
-    {{ form(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(form) }}
+        <button type="submit">Create User</button>
+    {{ form_end(form) }}
 {% endblock %}

@@ -7,10 +7,6 @@ use App\Form\Type\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,6 +39,7 @@ class UsersController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $user = $form->getData();
+
             $this->userRepository->add($user, flush: true);
 
             $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
