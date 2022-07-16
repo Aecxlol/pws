@@ -3,8 +3,11 @@
 namespace App\Form\Type;
 
 use App\Entity\User;
-use App\EventListener\AddPasswordFieldListener;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,14 +17,21 @@ class UserType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('email')
-            ->add('plainPassword');
-//            ->add('roles', ChoiceType::class, [
-//                'choices' => [
-//                    'admin' => null,
-//                    'user' => true,
-//                ]
-//            ])
+            ->add('email', EmailType::class)
+            ->add('plainPassword', PasswordType::class, [
+                'label' => 'Password',
+                'required' => true
+            ])
+            ->add('roles', CollectionType::class, [
+                'label' => 'Role',
+                'entry_type' => ChoiceType::class,
+                'entry_options' => [
+                    'choices' => [
+                        'admin' => 'ROLE_ADMIN',
+                        'user' => 'ROLE_USER',
+                    ],
+                ],
+            ]);
     }
 
     /**
