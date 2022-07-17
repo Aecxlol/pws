@@ -30,8 +30,6 @@ class UsersController extends AbstractController
     {
         $user = new User();
 
-//        $user->setRoles(['ROLE_USER']);
-
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
