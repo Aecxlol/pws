@@ -5,4 +5,5 @@
 {% block body %}
     <h1>Éditer l'utilisateur {{ user.name }}</h1>
 
+    {{ include ('/layouts/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
 {% endblock %}
