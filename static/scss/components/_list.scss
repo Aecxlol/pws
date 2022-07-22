@@ -1,6 +1,28 @@
+@use "../helpers/_variables" as *;
+
 body {
+
   ul {
     list-style-type: none;
     padding: 0;
+
+    li {
+
+      a {
+        color: $white;
+      }
+    }
+    &.admin-menu {
+      li {
+        padding: 3px 0;
+        a {
+          color: $greySeventyOne;
+
+          i {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
   }
 }

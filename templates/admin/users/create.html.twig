@@ -1,9 +1,9 @@
-{% extends 'layouts/admin/base.html.twig' %}
+{% extends 'admin/layouts/base.html.twig' %}
 
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
     <h1>Ajouter un utilisateur</h1>
 
-    {{ include('/layouts/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
+    {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
 {% endblock %}

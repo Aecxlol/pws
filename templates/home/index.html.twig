@@ -3,14 +3,15 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    {# MENU #}
-    {{ include('/home/section/menu.html.twig') }}
+        {# MENU #}
+        {{ include('/home/section/menu.html.twig') }}
+    <main>
+        {# MAIN SECTION #}
+        {{ include('/home/section/main_section.html.twig') }}
 
-    {# MAIN SECTION #}
-    {{ include('/home/section/main_section.html.twig') }}
-
-    {# ABOUT SECTION #}
-    {{ include('/home/section/about_section.html.twig') }}
+        {# ABOUT SECTION #}
+        {{ include('/home/section/about_section.html.twig') }}
+    </main>
 
     {# FOOTER #}
     {{ include('/home/section/footer.html.twig') }}

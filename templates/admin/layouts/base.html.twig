@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="/css/main.css">
+            {#            {{ encore_entry_link_tags('app') }} #}
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="/js/app.js" defer></script>
+            {#            {{ encore_entry_script_tags('app') }} #}
+        {% endblock %}
+    </head>
+    <body class="admin-body">
+        <div class="admin-container flex justify-content-center">
+            <div class="admin-sidebar">
+                <p class="white">Environnement<strong class="uppercase"> {{ app.environment }}</strong></p>
+                <h2 class="white uppercase greyNinety">menu</h2>
+                    {{ include('admin/partials/_menu.html.twig') }}
+            </div>
+            <div class="admin-content">
+                <div class="admin-top-div flex around align-center">
+                    <div></div>
+                    <h3 class="no-margin white font-50">Administration</h3>
+                    <p class="white no-margin">Bonjour {{ app.user.name }}</p>
+                </div>
+                {% block body %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

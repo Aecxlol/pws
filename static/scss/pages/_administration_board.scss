@@ -1,0 +1,28 @@
+@use "../helpers/_variables" as *;
+
+body {
+
+  div.admin-top-div {
+    background-color: $darkGrey;
+    height: 80px;
+  }
+
+  div.admin-container {
+
+    div.admin-sidebar {
+      background-color: $greyNineteen;
+      height: 100vh;
+      width: 230px;
+      padding-left: 20px;
+    }
+
+    div.admin-content {
+      flex: 1;
+      background-color: $darkGrey;
+
+      div.admin-btn-action-container {
+        margin-top: 50px;
+      }
+    }
+  }
+}

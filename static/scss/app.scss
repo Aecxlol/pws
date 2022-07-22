@@ -1,9 +1,14 @@
-// SECTION
-@use "pages/_main";
-@use "pages/_about";
-@use "pages/_menu";
+// BASE
+@use "base/_global";
 
 // COMPONENTS
 @use "components/_table";
 @use "components/_link";
 @use "components/_list";
+@use "components/_button";
+
+// SECTION
+@use "pages/_main";
+@use "pages/_about";
+@use "pages/_menu";
+@use "pages/_administration_board";

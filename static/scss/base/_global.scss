@@ -1,0 +1,123 @@
+@use "../helpers/_variables" as *;
+
+/* FLEXBOX */
+.flex {
+  display: flex;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.around {
+  justify-content: space-around;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+/* HIDE/SHOW */
+.hide {
+  display: none;
+}
+
+/* TEXT CLASS */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* FONT WEIGHT */
+.light {
+  font-weight: 300 !important;
+}
+
+.bold {
+  font-weight: 700 !important;
+}
+
+.extra {
+  font-weight: 800 !important;
+}
+
+.regular {
+  font-weight: 400 !important;
+}
+
+.semi-bold {
+  font-weight: 600 !important;
+}
+
+/* COLOR */
+.white {
+  color: $white;
+}
+
+.black {
+  color: $black;
+}
+
+.darkGrey {
+  color: $darkGrey;
+}
+
+.greyNineteen {
+  color: $greyNineteen;
+}
+
+.greyNinety {
+  color: $greyNinety;
+}
+
+.greySeventyOne {
+  color: $greySeventyOne;
+}
+
+/* OTHER */
+.full-width {
+  width: 100%;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.icon-12 {
+  font-size: 12px;
+}
+
+.font-50 {
+  font-size: 50px;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.p-absolute {
+  position: absolute;
+}

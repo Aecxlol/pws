@@ -1,18 +1,20 @@
-{% extends 'layouts/admin/base.html.twig' %}
+{% extends 'admin/layouts/base.html.twig' %}
 
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    <div>
-        <table class="table">
+    <div class="admin-btn-action-container">
+        <a href="{{ path('app_admin_users_create') }}" class="admin-btn-action-container">Ajouter</a>
+    </div>
+    <div class="admin-table-container flex justify-content-center">
+        <table class="admin-table">
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Créé le</th>
-                <th></th>
-                <th></th>
+                <th>Actions</th>
             </tr>
             {% for user in users %}
                 <tr>
@@ -21,13 +23,17 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.roles[0] }}</td>
                     <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date }}</time></td>
-                    <td><a href="{{ path('app_admin_users_update', { id: user.id }) }}">Éditer</a></td>
-                    {% if user.roles[0] != 'ROLE_ADMIN' %}
-                        <td><a href="{{ path('app_admin_users_delete', { id: user.id }) }}">Supprimer</a></td>
-                    {% endif %}
+                    <td class="p-relative admin-actions-col">
+                        <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ user.id }}"></i>
+                        <div class="admin-popup-actions p-absolute popup-id-{{ user.id }}">
+                            <a class="greyNinety" href="{{ path('app_admin_users_update', { id: user.id }) }}">Éditer</a>
+                            <hr>
+                            <a class="greyNinety" href="{{ path('app_admin_users_delete', { id: user.id }) }}">Supprimer</a>
+                        </div>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
-        <button><a href="{{ path('app_admin_users_create') }}">Ajouter</a></button>
     </div>
+    <p class="white xdlol">{{ users|length }} résultats</p>
 {% endblock %}
