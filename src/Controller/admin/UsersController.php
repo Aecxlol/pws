@@ -5,8 +5,6 @@ namespace App\Controller\admin;
 use App\Entity\User;
 use App\Form\Type\UserType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +19,10 @@ class UsersController extends AbstractController
     #[Route('/admin/users', name: 'app_admin_users', methods: 'GET')]
     public function index(): Response
     {
+        $showAction = 'showAction';
         $users = $this->userRepository->findAll();
 
-        return $this->render('admin/users/show.html.twig', compact('users'));
+        return $this->render('admin/users/show.html.twig', compact('users', 'showAction'));
     }
 
     #[Route('/admin/users/create', name: 'app_admin_users_create', methods: ['GET', 'POST'])]

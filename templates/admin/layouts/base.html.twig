@@ -16,7 +16,7 @@
             {#            {{ encore_entry_script_tags('app') }} #}
         {% endblock %}
     </head>
-    <body class="admin-body">
+    <body class="admin-body path{{ app.request.pathinfo|replace({'/': '_'}) }}">
         <div class="admin-container flex justify-content-center">
             <div class="admin-sidebar">
                 <p class="white">Environnement<strong class="uppercase"> {{ app.environment }}</strong></p>
