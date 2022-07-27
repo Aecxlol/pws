@@ -4,6 +4,7 @@ namespace App\Controller\admin;
 
 use App\Entity\User;
 use App\Form\Type\UserType;
+use App\Helper\Helper;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,29 +18,24 @@ class UsersController extends AbstractController
     }
 
     #[Route('/admin/users', name: 'app_admin_users', methods: 'GET')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
-        $showAction = 'showAction';
-        $users = $this->userRepository->findAll();
+        $currentPage = Helper::getPageName($request->getPathInfo());
+        $users       = $this->userRepository->findAll();
 
-        return $this->render('admin/users/show.html.twig', compact('users', 'showAction'));
+        return $this->render('admin/users/show.html.twig', compact('currentPage', 'users'));
     }
 
     #[Route('/admin/users/create', name: 'app_admin_users_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
         $user = new User();
-
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-
             $this->userRepository->add($user, flush: true);
-
             $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
 
             return $this->redirectToRoute('app_admin_users');
@@ -57,17 +53,12 @@ class UsersController extends AbstractController
     public function update(int $id, Request $request): Response
     {
         $user = $this->userRepository->findOneBy(compact('id'));
-
         $form = $this->createForm(UserType::class, $user);
-
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
-        {
+        if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
-
             $this->userRepository->add($user, flush: true);
-
             $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
 
             return $this->redirectToRoute('app_admin_users');
@@ -87,9 +78,7 @@ class UsersController extends AbstractController
     public function delete(int $id): Response
     {
         $user = $this->userRepository->findOneBy(compact('id'));
-
         $this->userRepository->remove($user, flush: true);
-
         $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
 
         return $this->redirectToRoute('app_admin_users');

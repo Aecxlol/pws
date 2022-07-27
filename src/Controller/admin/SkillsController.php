@@ -3,22 +3,18 @@
 namespace App\Controller\admin;
 
 use App\Helper\Helper;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DashboardController extends AbstractController
+class SkillsController extends AbstractController
 {
-    #[Route('%app.admin_path%', name: 'app_admin_dashboard')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/admin/skills', name: 'app_admin_skills')]
     public function index(Request $request): Response
     {
-        dd($request->getPathInfo());
         $currentPage = Helper::getPageName($request->getPathInfo());
 
-
-        return $this->render('admin/dashboard/show.html.twig', compact('currentPage'));
+        return $this->render('admin/skills/show.html.twig', compact('currentPage'));
     }
 }

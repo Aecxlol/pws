@@ -2,7 +2,6 @@ class UsersListPopupManager {
     constructor() {
         this.actionsBtn       = document.querySelector('.admin-table').getElementsByTagName('i');
         this.adminPopupAction = document.querySelector('.admin-table').getElementsByClassName('admin-popup-actions');
-
         this.init();
     }
 
@@ -27,12 +26,15 @@ class UsersListPopupManager {
                         // Open or close it depending on if it's already opened or closes
                         if (this.adminPopupAction[i].classList.contains('active')) {
                             this.adminPopupAction[i].classList.remove('active');
+                            this.actionsBtn[i].classList.remove('active');
                         } else {
                             this.adminPopupAction[i].classList.add('active');
+                            this.actionsBtn[i].classList.add('active');
                         }
                         // Prevents the others submenu to open
                     } else {
                         this.adminPopupAction[i].classList.remove('active');
+                        this.actionsBtn[i].classList.remove('active');
                     }
                 }
             } else {
@@ -49,6 +51,7 @@ class UsersListPopupManager {
             for (let j = 0; j < this.actionsBtn.length; j++) {
                 if (!e.target.classList.contains('admin-popup-actions')) {
                     this.adminPopupAction[j].classList.remove('active');
+                    this.actionsBtn[j].classList.remove('active');
                 }
             }
         }

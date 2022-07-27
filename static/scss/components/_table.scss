@@ -29,6 +29,13 @@ body {
           text-align: center;
         }
 
+        span {
+          background-color: #343a40;
+          color: white;
+          padding: 5px 11px;
+          border-radius: 4px;
+        }
+
         i {
           padding: 10px;
           cursor: pointer;
@@ -37,18 +44,32 @@ body {
           &:hover {
             background-color: #3b3d3e;
           }
+
+          &.active {
+            background-color: #3b3d3e;
+          }
         }
 
         div.admin-popup-actions {
-          background-color: $greyNineteen;
+          background-color: #3b3d3e;
           z-index: 3;
-          left: 50px;
+          left: 51px;
           width: 150px;
           height: 81px;
           display: none;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
 
           &.active {
-            display: block;
+            display: flex;
+          }
+
+          hr {
+            border: none;
+            background-color: #AAAAAA;
+            width: 60px;
+            height: 1px;
           }
         }
       }

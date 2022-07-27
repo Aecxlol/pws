@@ -3,7 +3,7 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    <!-- xd -->
+    <h4 class="white">{{ currentPage }}</h4>
     <div class="admin-btn-action-container">
         <a href="{{ path('app_admin_users_create') }}" class="admin-btn-action-container">Ajouter</a>
     </div>
@@ -22,7 +22,7 @@
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.roles[0] }}</td>
+                    <td><span>{{ user.roles[0]|lower|replace({'_': '', 'role': ''}) }}</span></td>
                     <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date }}</time></td>
                     <td class="p-relative admin-actions-col">
                         <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ user.id }}"></i>

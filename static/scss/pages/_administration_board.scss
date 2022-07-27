@@ -1,9 +1,9 @@
 @use "../helpers/_variables" as *;
 
-body {
+body.admin-body {
+  background-color: $darkGrey;
 
   div.admin-top-div {
-    background-color: $darkGrey;
     height: 80px;
   }
 
@@ -18,7 +18,6 @@ body {
 
     div.admin-content {
       flex: 1;
-      background-color: $darkGrey;
 
       div.admin-btn-action-container {
         margin-top: 50px;

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', (e) => {
 
-    if (document.querySelector("body").classList.contains('path_admin_users')) {
+    if (document.querySelector("body").classList.contains('path-admin-users')) {
         new UsersListPopupManager();
     }
 });
