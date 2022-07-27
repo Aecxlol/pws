@@ -18,17 +18,9 @@
     </head>
     <body class="admin-body path{{ app.request.pathinfo|replace({'/': '-'}) }}">
         <div class="admin-container flex justify-content-center">
-            <div class="admin-sidebar">
-                <p class="white">Environnement<strong class="uppercase"> {{ app.environment }}</strong></p>
-                <h2 class="white uppercase greyNinety">menu</h2>
-                    {{ include('admin/partials/_menu.html.twig') }}
-            </div>
+            {{ include('admin/partials/_sidebar.html.twig') }}
             <div class="admin-content">
-                <div class="admin-top-div flex around align-center">
-                    <div></div>
-                    <h3 class="no-margin white font-50">Administration</h3>
-                    <p class="white no-margin">Bonjour {{ app.user.name }}</p>
-                </div>
+                <h3 class="no-margin white font-50 text-center">Administration</h3>
                 {% block body %}
 
                 {% endblock %}

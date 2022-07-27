@@ -15,9 +15,7 @@ class DashboardController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request): Response
     {
-        dd($request->getPathInfo());
         $currentPage = Helper::getPageName($request->getPathInfo());
-
 
         return $this->render('admin/dashboard/show.html.twig', compact('currentPage'));
     }

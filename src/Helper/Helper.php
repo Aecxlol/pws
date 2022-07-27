@@ -12,6 +12,7 @@ class Helper
     public static function getPageName(string $pathInfo): string
     {
         $pageTitle = [
+            '/admin' => 'tableau de bord',
             'users' => 'utilisateurs',
             'skills' => 'compétences',
             'portfolio' => 'portfolio'

@@ -7,6 +7,13 @@ body.admin-body {
     height: 80px;
   }
 
+  h4.admin-parts-title {
+    background-color: #505e6a;
+    font-size: 37px;
+    padding: 20px 0;
+    margin: 0;
+  }
+
   div.admin-container {
 
     div.admin-sidebar {
@@ -14,10 +21,15 @@ body.admin-body {
       height: 100vh;
       width: 230px;
       padding-left: 20px;
+      padding-top: 50px;
     }
 
     div.admin-content {
       flex: 1;
+
+      h3 {
+        padding: 50px 0;
+      }
 
       div.admin-btn-action-container {
         margin-top: 50px;
