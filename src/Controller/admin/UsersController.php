@@ -8,22 +8,29 @@ use App\Helper\Helper;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UsersController extends AbstractController
 {
-    public function __construct(private UserRepository $userRepository)
+    private string $currentPage;
+
+    public function __construct(private UserRepository $userRepository, private RequestStack $requestStack)
     {
+        $this->requestStack = $requestStack;
+        $this->currentPage = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
     #[Route('/admin/users', name: 'app_admin_users', methods: 'GET')]
     public function index(Request $request): Response
     {
-        $currentPage = Helper::getPageName($request->getPathInfo());
         $users       = $this->userRepository->findAll();
 
-        return $this->render('admin/users/show.html.twig', compact('currentPage', 'users'));
+        return $this->render('admin/users/show.html.twig', [
+            'users' => $users,
+            'currentPage' => $this->currentPage
+        ]);
     }
 
     #[Route('/admin/users/create', name: 'app_admin_users_create', methods: ['GET', 'POST'])]
@@ -41,7 +48,10 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('app_admin_users');
         }
 
-        return $this->renderForm('admin/users/create.html.twig', compact('form'));
+        return $this->renderForm('admin/users/create.html.twig', [
+            'form' => $form,
+            'currentPage' => $this->currentPage
+        ]);
     }
 
     /**
@@ -79,7 +89,7 @@ class UsersController extends AbstractController
     {
         $user = $this->userRepository->findOneBy(compact('id'));
         $this->userRepository->remove($user, flush: true);
-        $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
+        $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été supprimé");
 
         return $this->redirectToRoute('app_admin_users');
     }

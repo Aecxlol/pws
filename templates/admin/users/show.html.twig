@@ -4,10 +4,8 @@
 
 {% block body %}
     <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
-    <div class="admin-btn-action-container">
-        <a href="{{ path('app_admin_users_create') }}" class="admin-btn-action-container">Ajouter</a>
-    </div>
-    <div class="admin-table-container flex justify-content-center">
+    <div class="admin-sub-content">
+        <a href="{{ path('app_admin_users_create') }}" class="admin-btn-action-container add-user-btn">Ajouter</a>
         <table class="admin-table">
             <tr>
                 <th>Id</th>
@@ -23,7 +21,7 @@
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
                     <td><span>{{ user.roles[0]|lower|replace({'_': '', 'role': ''}) }}</span></td>
-                    <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date }}</time></td>
+                    <td><time datetime="{{ user.createdAt|date('Y-m-d H:i') }}">{{ user.createdAt|date('d-m-Y') }}</time></td>
                     <td class="p-relative admin-actions-col">
                         <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ user.id }}"></i>
                         <div class="admin-popup-actions p-absolute popup-id-{{ user.id }}">
@@ -35,6 +33,7 @@
                 </tr>
             {% endfor %}
         </table>
+        <p class="white">{{ users|length }} résultats</p>
     </div>
-    <p class="white xdlol">{{ users|length }} résultats</p>
+
 {% endblock %}

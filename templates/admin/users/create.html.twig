@@ -3,7 +3,10 @@
 {% block title %}Hello DashboardController!{% endblock %}
 
 {% block body %}
-    <h1>Ajouter un utilisateur</h1>
+    <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
 
-    {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
+    <div class="admin-sub-content">
+        <h5>Ajouter un utilisateur</h5>
+        {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
+    </div>
 {% endblock %}

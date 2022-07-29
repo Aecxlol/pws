@@ -8,10 +8,12 @@ body.admin-body {
   }
 
   h4.admin-parts-title {
-    background-color: #505e6a;
-    font-size: 37px;
+    background-color: #416183;
+    font-size: 22px;
+    margin: 0 auto 80px;
     padding: 20px 0;
-    margin: 0;
+    width: 14%;
+    letter-spacing: 1px;
   }
 
   div.admin-container {
@@ -31,8 +33,10 @@ body.admin-body {
         padding: 50px 0;
       }
 
-      div.admin-btn-action-container {
-        margin-top: 50px;
+      div.admin-sub-content {
+        position: relative;
+        margin: 0 150px;
+        padding-top: 65px;
       }
     }
   }

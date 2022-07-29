@@ -3,9 +3,11 @@
 body {
 
   table.admin-table {
-    table-layout: auto;
-    width: 80%;
-    border-spacing: 0;
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 1px;
+    margin-right: auto;
+    margin-left: auto;
 
     tr {
 
@@ -21,14 +23,20 @@ body {
         border: none;
         color: $greyNinety;
         height: 50px;
+        padding-left: 15px;
 
         &:last-child {
           text-align: center;
+          padding-left: 0;
         }
       }
 
       th {
         text-align: left;
+
+        &:nth-child(1) {
+          width: 5%;
+        }
       }
 
       td {
@@ -58,16 +66,26 @@ body {
         div.admin-popup-actions {
           background-color: #3b3d3e;
           z-index: 3;
-          left: 51px;
+          left: 109px;
           width: 150px;
           height: 81px;
           display: none;
           flex-direction: column;
           align-items: center;
-          justify-content: center;
+          justify-content: space-evenly;
 
           &.active {
             display: flex;
+          }
+
+          a {
+            width: 70%;
+            padding: 5px 0;
+            transition: 0.3s;
+
+            &:hover {
+              background-color: #416183;
+            }
           }
 
           hr {
@@ -75,6 +93,7 @@ body {
             background-color: #AAAAAA;
             width: 60px;
             height: 1px;
+            margin: 0;
           }
         }
       }

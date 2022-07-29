@@ -1,7 +1,9 @@
 {% for type, messages in app.flashes %}
     {% for message in messages %}
         <div class="alert alert-{{ type }}" role="alert">
-            {{ message }}
+            {% if type == 'success' %}
+                <i class="fa-solid fa-check"></i> {{ message }}.
+            {% endif %}
         </div>
     {% endfor %}
 {% endfor %}

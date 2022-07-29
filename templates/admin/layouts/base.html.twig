@@ -16,11 +16,12 @@
             {#            {{ encore_entry_script_tags('app') }} #}
         {% endblock %}
     </head>
-    <body class="admin-body path{{ app.request.pathinfo|replace({'/': '-'}) }}">
+    <body class="admin-body path{{ app.request.pathInfo|replace({'/': '-'}) }}">
         <div class="admin-container flex justify-content-center">
             {{ include('admin/partials/_sidebar.html.twig') }}
             <div class="admin-content">
-                <h3 class="no-margin white font-50 text-center">Administration</h3>
+                <h3 class="no-margin white font-50 text-center uppercase">Administration</h3>
+                {{ include('admin/partials/_flash_messages.html.twig') }}
                 {% block body %}
 
                 {% endblock %}

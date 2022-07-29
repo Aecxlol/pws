@@ -14,9 +14,14 @@ body {
     }
     &.admin-menu {
       li {
-        padding: 3px 0;
+        padding: 11px 0;
         a {
           color: $greySeventyOne;
+          padding: 10px 20px 10px 10px;
+
+          &.active {
+            background-color: #4a4a4a;
+          }
 
           i {
             margin-right: 5px;

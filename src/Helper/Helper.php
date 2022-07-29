@@ -14,6 +14,7 @@ class Helper
         $pageTitle = [
             '/admin' => 'tableau de bord',
             'users' => 'utilisateurs',
+            'users/create' => 'utilisateurs',
             'skills' => 'compétences',
             'portfolio' => 'portfolio'
         ];
