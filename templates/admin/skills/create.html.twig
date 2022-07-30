@@ -1,0 +1,12 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+
+    <div class="admin-sub-content">
+        <h5>Ajouter une compétence</h5>
+        {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
+    </div>
+{% endblock %}

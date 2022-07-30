@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', (e) => {
     let body = document.querySelector("body");
 
-    if (body.classList.contains('path-admin-users')) {
+    if (body.classList.contains('path-admin-users') || body.classList.contains('path-admin-skills')) {
         new UsersListPopupManager();
     }
 

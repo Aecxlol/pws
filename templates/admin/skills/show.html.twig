@@ -4,4 +4,33 @@
 
 {% block body %}
     <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+    <div class="admin-sub-content">
+        <a href="{{ path('app_admin_skills_create') }}" class="admin-btn-action-container add-user-btn">Ajouter</a>
+        <table class="admin-table skills">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Image</th>
+                <th>Niveau</th>
+                <th>Actions</th>
+            </tr>
+            {% for skill in skills %}
+                <tr>
+                    <td>{{ skill.id }}</td>
+                    <td class="uppercase"><strong>{{ skill.name }}</strong></td>
+                    <td><img class="skill-img" src="/img/skills/{{ skill.image }}" alt=""></td>
+                    <td>{{ skill.level }}</td>
+                    <td class="p-relative admin-actions-col">
+                        <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ skill.id }}"></i>
+                        <div class="admin-popup-actions p-absolute popup-id-{{ skill.id }}">
+                            <a class="greyNinety" href="{{ path('app_admin_skills_update', { id: skill.id }) }}">Éditer</a>
+                            <hr>
+                            <a class="greyNinety" href="{{ path('app_admin_skills_delete', { id: skill.id }) }}">Supprimer</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <p class="white">{{ skills|length }} résultats</p>
+    </div>
 {% endblock %}

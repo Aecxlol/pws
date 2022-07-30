@@ -19,13 +19,13 @@ class UsersController extends AbstractController
     public function __construct(private UserRepository $userRepository, private RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->currentPage = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
+        $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
     #[Route('/admin/users', name: 'app_admin_users', methods: 'GET')]
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        $users       = $this->userRepository->findAll();
+        $users = $this->userRepository->findAll();
 
         return $this->render('admin/users/show.html.twig', [
             'users' => $users,

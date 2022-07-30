@@ -7,6 +7,7 @@ parameters:
   app.admin_path: '/KrfRpoKb1HATO6EN4V4E'
   app.login_path: '/MZzBU6EbJ31wZeehonk5'
   app.name: 'Portfolio de Damien A.'
+#  skill_images_directory: '%kernel.project_dir%/static/img/skills'
 
 when@dev:
     parameters:
@@ -27,6 +28,10 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
+
+#    App\Service\FileUploader:
+#        arguments:
+#            $targetDirectory: '%skill_images_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

@@ -9,6 +9,15 @@ body {
     margin-right: auto;
     margin-left: auto;
 
+    &.skills {
+
+      th, td {
+        &:nth-child(1n + 3) {
+          text-align: center;
+        }
+      }
+    }
+
     tr {
 
       &:nth-child(even) {
@@ -23,7 +32,7 @@ body {
         border: none;
         color: $greyNinety;
         height: 50px;
-        padding-left: 15px;
+        padding: 0 15px;
 
         &:last-child {
           text-align: center;
@@ -40,6 +49,12 @@ body {
       }
 
       td {
+
+        img.skill-img {
+          width: 85px;
+          height: 70px;
+          object-fit: contain;
+        }
 
         span {
           background-color: #343a40;
