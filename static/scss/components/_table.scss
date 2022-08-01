@@ -11,6 +11,14 @@ body {
 
     &.skills {
 
+      tr {
+        height: 100px;
+
+        &:nth-child(1) {
+          height: unset;
+        }
+      }
+
       th, td {
         &:nth-child(1n + 3) {
           text-align: center;

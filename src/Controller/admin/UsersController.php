@@ -69,7 +69,7 @@ class UsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
             $this->userRepository->add($user, flush: true);
-            $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
+            $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été édité");
 
             return $this->redirectToRoute('app_admin_users');
         }

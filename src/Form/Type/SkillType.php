@@ -31,6 +31,7 @@ class SkillType extends AbstractType
                 ]
             ])
             ->add('level')
+            ->add('displayOrder')
         ;
     }
 

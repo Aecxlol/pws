@@ -1,0 +1,9 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+    <h1>Éditer la compétence {{ skill.name }}</h1>
+
+    {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
+{% endblock %}

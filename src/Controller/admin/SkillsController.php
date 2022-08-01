@@ -68,6 +68,22 @@ class SkillsController extends AbstractController
     #[Route('/admin/skills/update/{id}', name: 'app_admin_skills_update', methods: 'GET')]
     public function update(int $id, Request $request): Response
     {
+        $skill = $this->skillRepository->findOneBy(compact('id'));
+        $form = $this->createForm(SkillType::class, $skill);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $skill = $form->getData();
+            $this->skillRepository->add($skill, flush: true);
+            $this->addFlash('success', "La compétence {$skill->getName()} a bien été éditée");
+
+            return $this->redirectToRoute('app_admin_skills');
+        }
+
+        return $this->render('admin/skills/update.html.twig', [
+            'skill' => $skill,
+            'form' => $form->createView()
+        ]);
 
     }
 

@@ -1,0 +1,15 @@
+<section class="skills-section">
+    <h2>compétences</h2>
+    <div class="skills-container">
+        {% for skill in skills %}
+            <div class="skill-container">
+                <div class="skill-img-container">
+                    <img class="skill-img" src="/img/skills/{{ skill.image }}" alt="">
+                </div>
+                <p class="skill-name">
+                    {{ skill.name }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</section>

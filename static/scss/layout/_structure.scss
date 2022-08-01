@@ -1,0 +1,26 @@
+body.front-body {
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1200px 1fr;
+    grid-template-rows: repeat(5, 100vh);
+    grid-template-areas:
+      "main-section  main-section main-section"
+      ". about-section ."
+      ". skills-section ."
+      ". . ."
+      ". . .";
+  }
+
+  section.main-section {
+    grid-area: main-section;
+  }
+
+  section.about-section {
+    grid-area: about-section;
+  }
+
+  section.skills-section {
+    grid-area: skills-section;
+  }
+}

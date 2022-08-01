@@ -12,6 +12,7 @@
                 <th>Nom</th>
                 <th>Image</th>
                 <th>Niveau</th>
+                <th>Ordre d'affichage</th>
                 <th>Actions</th>
             </tr>
             {% for skill in skills %}
@@ -20,6 +21,7 @@
                     <td class="uppercase"><strong>{{ skill.name }}</strong></td>
                     <td><img class="skill-img" src="/img/skills/{{ skill.image }}" alt=""></td>
                     <td>{{ skill.level }}</td>
+                    <td>{{ skill.displayOrder }}</td>
                     <td class="p-relative admin-actions-col">
                         <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ skill.id }}"></i>
                         <div class="admin-popup-actions p-absolute popup-id-{{ skill.id }}">

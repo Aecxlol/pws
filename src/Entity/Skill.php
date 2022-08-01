@@ -22,6 +22,9 @@ class Skill
     #[ORM\Column(type: 'integer')]
     private $level;
 
+    #[ORM\Column(type: 'integer')]
+    private $displayOrder;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +62,18 @@ class Skill
     public function setLevel(int $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getDisplayOrder(): ?int
+    {
+        return $this->displayOrder;
+    }
+
+    public function setDisplayOrder(int $displayOrder): self
+    {
+        $this->displayOrder = $displayOrder;
 
         return $this;
     }

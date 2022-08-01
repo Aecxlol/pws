@@ -8,8 +8,16 @@
 @use "components/_button";
 @use "components/_flash_message";
 
+// LAYOUT
+@use "layout/_structure.scss";
+
 // SECTION
 @use "pages/_main";
 @use "pages/_about";
+@use "pages/_skills";
 @use "pages/_menu";
 @use "pages/_administration_board";
+
+body {
+  font-family: 'Merriweather', serif;
+}
