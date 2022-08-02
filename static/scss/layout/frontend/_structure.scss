@@ -10,17 +10,17 @@ body.front-body {
       ". skills-section ."
       ". . ."
       ". . .";
-  }
 
-  section.main-section {
-    grid-area: main-section;
-  }
+    section.main-section {
+      grid-area: main-section;
+    }
 
-  section.about-section {
-    grid-area: about-section;
-  }
+    section.about-section {
+      grid-area: about-section;
+    }
 
-  section.skills-section {
-    grid-area: skills-section;
+    section.skills-section {
+      grid-area: skills-section;
+    }
   }
 }

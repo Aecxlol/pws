@@ -14,7 +14,7 @@ const uglify      = require('gulp-uglify');
 // For js compatibility
 const babel       = require('gulp-babel');
 
-const scssFolder = 'static/scss/**/*.scss';
+const scssFolder = 'static/scss/**/**/*.scss';
 const jsFolder   = 'static/js/**/*.js';
 
 // .pipe() is similar to .then() in js

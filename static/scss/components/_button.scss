@@ -5,10 +5,9 @@ a.admin-btn-action-container {
   background-color: #007bff;
   padding: 10px 20px;
   border-radius: 3px;
+  transition: background-color .5s;
 
-  &.add-user-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
+  &:hover {
+    background-color: #0069d9;
   }
 }

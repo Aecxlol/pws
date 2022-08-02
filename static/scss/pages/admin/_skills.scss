@@ -1,0 +1,39 @@
+body.path-admin-skills {
+
+  div.btn-container {
+    text-align: right;
+    margin-bottom: 45px;
+  }
+
+  div.skills-order {
+    display: flex;
+    border: 1px dashed white;
+    margin-bottom: 45px;
+    min-height: 136px;
+
+    div.skill {
+      padding: 12px;
+      border: 1px solid white;
+      cursor: grab;
+      user-select: none;
+      text-align: center;
+
+      &:active {
+        cursor: grabbing;
+      }
+
+      &.dragging {
+        opacity: .5;
+      }
+
+      img {
+        pointer-events: none;
+      }
+
+      p {
+        color: white;
+        font-size: 11px;
+      }
+    }
+  }
+}

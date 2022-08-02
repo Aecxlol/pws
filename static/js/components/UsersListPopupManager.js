@@ -1,4 +1,4 @@
-class UsersListPopupManager {
+class EditDeletePopupManager {
     constructor() {
         this.actionsBtn       = document.querySelector('.admin-table').getElementsByTagName('i');
         this.adminPopupAction = document.querySelector('.admin-table').getElementsByClassName('admin-popup-actions');

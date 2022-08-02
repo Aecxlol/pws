@@ -1,23 +1,29 @@
-// BASE
+//---- BASE ----//
 @use "base/_global";
 
-// COMPONENTS
+//---- HELPERS ----//
+@use "helpers/_animations";
+
+//---- COMPONENTS ----//
 @use "components/_table";
 @use "components/_link";
 @use "components/_list";
 @use "components/_button";
 @use "components/_flash_message";
+@use "components/_login_form";
+@use "components/_images";
 
-// LAYOUT
-@use "layout/_structure.scss";
+//---- LAYOUT ----//
+// admin
+@use "layout/admin/_administration_board";
+// frontend
+@use "layout/frontend/_structure";
 
-// SECTION
-@use "pages/_main";
-@use "pages/_about";
-@use "pages/_skills";
-@use "pages/_menu";
-@use "pages/_administration_board";
-
-body {
-  font-family: 'Merriweather', serif;
-}
+//---- PAGES ----//
+// admin
+@use "pages/admin/_skills" as AdminPages;
+// frontend
+@use "pages/frontend/_main";
+@use "pages/frontend/_about";
+@use "pages/frontend/_skills";
+@use "pages/frontend/_menu";

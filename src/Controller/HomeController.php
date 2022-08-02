@@ -14,6 +14,6 @@ class HomeController extends AbstractController
     {
         $skills = $skillRepository->findAll();
 
-        return $this->render('home/index.html.twig', compact('skills'));
+        return $this->render('frontend/index.html.twig', compact('skills'));
     }
 }

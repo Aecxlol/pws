@@ -1,6 +1,6 @@
 @use "../helpers/_variables" as *;
 @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
 
 /* FLEXBOX */
 .flex {
@@ -122,4 +122,12 @@
 
 .p-absolute {
   position: absolute;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  body {
+    font-family: 'Merriweather', serif;
+  }
 }

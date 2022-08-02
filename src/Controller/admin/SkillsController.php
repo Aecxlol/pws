@@ -65,7 +65,7 @@ class SkillsController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/skills/update/{id}', name: 'app_admin_skills_update', methods: 'GET')]
+    #[Route('/admin/skills/update/{id}', name: 'app_admin_skills_update', methods: ['GET', 'POST'])]
     public function update(int $id, Request $request): Response
     {
         $skill = $this->skillRepository->findOneBy(compact('id'));

@@ -20,6 +20,7 @@ body {
       }
 
       th, td {
+        /* starts at child n°3 and increments by 1 */
         &:nth-child(1n + 3) {
           text-align: center;
         }
@@ -57,12 +58,6 @@ body {
       }
 
       td {
-
-        img.skill-img {
-          width: 85px;
-          height: 70px;
-          object-fit: contain;
-        }
 
         span {
           background-color: #343a40;

@@ -1,0 +1,21 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {# MENU #}
+    {{ include('/frontend/section/menu.html.twig') }}
+    <main>
+        {# MAIN SECTION #}
+        {{ include('/frontend/section/main_section.html.twig') }}
+
+        {# ABOUT SECTION #}
+        {{ include('/frontend/section/about_section.html.twig') }}
+
+        {# SKILLS SECTION #}
+        {{ include('/frontend/section/skills_section.html.twig') }}
+    </main>
+
+    {# FOOTER #}
+    {{ include('/frontend/section/footer.html.twig') }}
+{% endblock %}
