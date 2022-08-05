@@ -10,12 +10,15 @@
             <a href="{{ path('app_admin_skills_create') }}" class="admin-btn-action-container add-user-btn">Ajouter</a>
             <a href="#" class="admin-btn-action-container define-skills-order">Définir l'odre</a>
         </div>
-        <div class="skills-order-container">
+
+        <p class="skills-updating" id="skills-updating"><i class="fas fa-spinner fa-pulse"></i> Mise à jour des compétences en cours. Patientez svp...</p>
+        <p class="skills-update-success" id="skills-update-success">Ordre des compétences mis à jour !</p>
+        <div class="skills-order-container" >
             <h5 class="white">Les compétences ci-dessous n'ont pas d'ordre défini</h5>
             <div class="skills-order undefined-order">
                 {% for skill in skills %}
                     {% if skill.displayOrder == notDefined %}
-                        <div class="skill" draggable="true">
+                        <div class="skill" draggable="true" data-skill-path="{{ path('app_admin_skills_update_display_order', {id: skill.id, order: skill.displayOrder}) }}">
                             <img class="skill-img" src="/img/skills/{{ skill.image }}" alt="">
                             <p>Ordre : <span class="skill-order-number">non défini</span></p>
                         </div>
@@ -24,11 +27,11 @@
             </div>
             <h5 class="white">Liste des compétences avec ordre défini</h5>
             <div class="skills-order defined-order">
-                {% for skill in skills %}
+                {% for skill in skills|sort((a, b) => a.displayOrder <=> b.displayOrder) %}
                     {% if skill.displayOrder %}
-                        <div class="skill" draggable="true">
+                        <div class="skill" draggable="true" data-skill-path="{{ path('app_admin_skills_update_display_order', {id: skill.id, order: skill.displayOrder}) }}">
                             <img class="skill-img" src="/img/skills/{{ skill.image }}" alt="">
-                            <p>Ordre <span class="skill-order-number">{{ skill.displayOrder }}</span></p>
+                            <p>Ordre : <span class="skill-order-number">{{ skill.displayOrder }}</span></p>
                         </div>
                     {% endif %}
                 {% endfor %}

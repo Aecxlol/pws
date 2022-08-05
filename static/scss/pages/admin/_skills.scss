@@ -5,34 +5,59 @@ body.path-admin-skills {
     margin-bottom: 45px;
   }
 
-  div.skills-order {
-    display: flex;
-    border: 1px dashed white;
-    margin-bottom: 45px;
-    min-height: 136px;
+  p.skills-updating {
+    background-color: #17a2b8;
+    color: white;
+    padding: 15px;
+    display: none;
 
-    div.skill {
-      padding: 12px;
-      border: 1px solid white;
-      cursor: grab;
-      user-select: none;
-      text-align: center;
+    &.active {
+      display: unset;
+    }
+  }
 
-      &:active {
-        cursor: grabbing;
-      }
+  p.skills-update-success {
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    display: none;
 
-      &.dragging {
-        opacity: .5;
-      }
+    &.active {
+      display: unset;
+    }
+  }
 
-      img {
-        pointer-events: none;
-      }
+  div.skills-order-container {
 
-      p {
-        color: white;
-        font-size: 11px;
+    div.skills-order {
+      display: flex;
+      border: 1px dashed white;
+      margin-bottom: 45px;
+      min-height: 136px;
+
+      div.skill {
+        padding: 12px;
+        border: 1px solid white;
+        cursor: grab;
+        user-select: none;
+        text-align: center;
+
+        &:active {
+          cursor: grabbing;
+        }
+
+        &.dragging {
+          opacity: .5;
+        }
+
+        img {
+          pointer-events: none;
+        }
+
+        p {
+          color: white;
+          font-size: 11px;
+        }
       }
     }
   }

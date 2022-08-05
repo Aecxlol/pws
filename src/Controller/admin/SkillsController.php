@@ -87,7 +87,7 @@ class SkillsController extends AbstractController
 
     }
 
-    #[Route('/admin/skills/delete/{id}', name: 'app_admin_skills_delete', methods: 'GET')]
+    #[Route('/admin/skills/delete/{id}', name: 'app_admin_skills_delete', options: ['expose' => true], methods: 'GET')]
     public function delete(int $id): Response
     {
         $skill = $this->skillRepository->findOneBy(compact('id'));
@@ -99,6 +99,16 @@ class SkillsController extends AbstractController
         }
 
         $this->addFlash('success', "La compétence {$skill->getName()} a bien été supprimée");
+        return $this->redirectToRoute('app_admin_skills');
+    }
+
+    #[Route('/admin/skills/update/{id}/displayOrder/{order}', name: 'app_admin_skills_update_display_order', methods: ['GET', 'POST'])]
+    public function updateDisplayOrder(int $id, int $order): Response
+    {
+        $skill = $this->skillRepository->findOneBy(compact('id'));
+        $skill->setDisplayOrder($order);
+        $this->skillRepository->add($skill, flush: true);
+
         return $this->redirectToRoute('app_admin_skills');
     }
 }

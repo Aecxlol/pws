@@ -16,4 +16,12 @@ class HomeController extends AbstractController
 
         return $this->render('frontend/index.html.twig', compact('skills'));
     }
+
+    #[Route('/', name: 'app_home_contact_form')]
+    public function lol(SkillRepository $skillRepository): Response
+    {
+
+
+        return $this->render('frontend/index.html.twig', compact('skills'));
+    }
 }
