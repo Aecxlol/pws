@@ -57,12 +57,12 @@ class SkillsOrderManager {
     _defineElementOrderAfterDragging = (element) => {
         const POSITION                                      = element.getElementsByTagName('span');
         const SKILL_DIV_PARENT                              = element.parentNode;
-        const UNDEFINED_ORDER                               = 'non défini'
+        const UNDEFINED_ORDER                               = 'non défini';
+        const DEFINED_ORDER_CONTAINER = document.getElementById('defined-order');
         const DIV_IS_DRAGGED_IN_THE_DEFINED_ORDER_CONTAINER = element.parentNode.classList.contains('defined-order');
 
         // For all the skill divs
         [...SKILL_DIV_PARENT.children].forEach((skillDiv, i) => {
-
             // if one of them is dragged in the defined-order container
             if (DIV_IS_DRAGGED_IN_THE_DEFINED_ORDER_CONTAINER) {
                 // assigns to all the skill divs in the container a display order

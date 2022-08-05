@@ -1,0 +1,20 @@
+footer.footer {
+  padding: 20px 0;
+  background-color: #dddddd;
+
+  div.social-medias {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    p {
+      margin: 0;
+      padding: 0 20px;
+    }
+  }
+
+  p.copyright {
+    text-align: center;
+    margin: 0;
+  }
+}
