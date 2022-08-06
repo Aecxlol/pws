@@ -7,14 +7,30 @@ footer.footer {
     justify-content: center;
     margin-bottom: 20px;
 
-    p {
-      margin: 0;
-      padding: 0 20px;
+    a {
+      padding: 13px;
+      background-color: #c5c5c5;
+      border-radius: 50%;
+      transition: background-color .3s;
+
+      &:hover {
+        background-color: #b7b7b7;
+      }
+
+      &:nth-child(2) {
+        margin: 0 20px;
+      }
+
+      i {
+        font-size: 23px;
+        color: #6590b7;
+      }
     }
   }
 
   p.copyright {
     text-align: center;
     margin: 0;
+    letter-spacing: 1px;
   }
 }

@@ -12,6 +12,7 @@
 @use "components/_flash_message";
 @use "components/_login_form";
 @use "components/_images";
+@use "components/_titles";
 
 //---- LAYOUT ----//
 // admin
@@ -27,4 +28,5 @@
 @use "pages/frontend/_about";
 @use "pages/frontend/_skills";
 @use "pages/frontend/_menu";
+@use "pages/frontend/_contact";
 @use "pages/frontend/_footer";

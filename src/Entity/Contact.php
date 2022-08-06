@@ -22,7 +22,7 @@ class Contact
     /**
      * @var string
      */
-    private string $object;
+    private string $subject;
 
     /**
      * @var string
@@ -80,17 +80,17 @@ class Contact
     /**
      * @return string
      */
-    public function getObject(): string
+    public function getSubject(): string
     {
-        return $this->object;
+        return $this->subject;
     }
 
     /**
-     * @param string $object
+     * @param string $subject
      */
-    public function setObject(string $object): void
+    public function setSubject(string $subject): void
     {
-        $this->object = $object;
+        $this->subject = $subject;
     }
 
     /**

@@ -1,5 +1,14 @@
 <section class="contact-section">
     <h2>Contact</h2>
-    <h3>N'hésitez pas à me contacter</h3>
-    {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Envoyer' }) }}
+    <h3>Pour échanger avec moi</h3>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        <div class="form-name">
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+        </div>
+        {{ form_row(form.email) }}
+        {{ form_row(form.subject) }}
+        {{ form_row(form.message) }}
+        <button class="admin-btn-action-container">Envoyer</button>
+    {{ form_end(form) }}
 </section>

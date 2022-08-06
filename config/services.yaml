@@ -6,7 +6,8 @@
 parameters:
   app.admin_path: '/KrfRpoKb1HATO6EN4V4E'
   app.login_path: '/MZzBU6EbJ31wZeehonk5'
-  app.name: 'Portfolio de Damien A.'
+  app.contact_email: 'damienweb@contact.com'
+  app.name: 'DamienWeb'
 #  skill_images_directory: '%kernel.project_dir%/static/img/skills'
 
 when@dev:
