@@ -9,6 +9,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ContactType extends AbstractType
 {
@@ -16,19 +19,39 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label' => 'Prénom'
+                'label' => 'Prénom',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3])
+                ]
             ])
             ->add('lastname', TextType::class, [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3])
+                ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'Email'
+                'label' => 'Email',
+                'constraints' => [
+                    new NotBlank(),
+                    new Email()
+                ]
             ])
             ->add('subject', TextType::class, [
-                'label' => 'Sujet'
+                'label' => 'Sujet',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3])
+                ]
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Message'
+                'label' => 'Message',
+                'constraints' => [
+                    new NotBlank(),
+                    new Length(['min' => 3])
+                ]
             ])
         ;
     }

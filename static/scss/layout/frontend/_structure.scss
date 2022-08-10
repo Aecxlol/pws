@@ -3,11 +3,12 @@ body.front-body {
   main {
     display: grid;
     grid-template-columns: 1fr 1200px 1fr;
-    grid-template-rows: repeat(4, minmax(100vh, auto));
+    grid-template-rows: repeat(5, minmax(100vh, auto));
     grid-template-areas:
       "main-section  main-section main-section"
       ". about-section ."
       ". skills-section ."
+      ". portfolio-section ."
       ". contact-section .";
 
     section.main-section {
@@ -20,6 +21,10 @@ body.front-body {
 
     section.skills-section {
       grid-area: skills-section;
+    }
+
+    section.portfolio-section {
+      grid-area: portfolio-section;
     }
 
     section.contact-section {

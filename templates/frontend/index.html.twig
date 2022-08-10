@@ -5,7 +5,7 @@
 {% block body %}
     {# MENU #}
     {{ include('/frontend/section/menu.html.twig') }}
-    <main>
+    <main id="main">
         {# MAIN SECTION #}
         {{ include('/frontend/section/main.html.twig') }}
 
@@ -14,6 +14,9 @@
 
         {# SKILLS SECTION #}
         {{ include('/frontend/section/skills.html.twig') }}
+
+        {# PORTFOLIO SECTION #}
+        {{ include('/frontend/section/portfolio.html.twig') }}
 
         {# CONTACT SECTION #}
         {{ include('/frontend/section/contact.html.twig') }}

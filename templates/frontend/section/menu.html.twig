@@ -1,11 +1,11 @@
-<header class="flex">
+<header class="flex" id="front-menu">
     <nav>
         <ul>
             <li><a href="#">Accueil</a></li>
             <li><a href="#about-section-id">à propos</a></li>
             <li><a href="#skills-section-id">compétences</a></li>
             <li><a href="#">portfolio</a></li>
-            <li><a href="#">contact</a></li>
+            <li><a href="#contact-section-id">contact</a></li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li><a href="{{ path('app_admin_dashboard') }}">administration</a></li>
             {% endif %}

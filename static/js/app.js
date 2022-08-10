@@ -1,5 +1,10 @@
-document.addEventListener('DOMContentLoaded', (e) => {
+document.addEventListener('DOMContentLoaded', () => {
     let body = document.querySelector("body");
+    /* FRONTEND */
+    if(body.classList.contains('front-body')) {
+        new Scroller();
+        new TypeWriter();
+    }
 
     /* ADMIN */
     if (body.classList.contains('admin-body')) {
@@ -13,6 +18,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             new SkillsOrderManager();
         }
 
+        /* MENU IN THE SIDEBAR */
         new HighlightAdminMenuItem();
     }
 });

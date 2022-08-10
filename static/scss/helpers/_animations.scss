@@ -1,3 +1,4 @@
+/* MAIN SECTION CARRET ANIMATION */
 @keyframes mover {
   from {
     transform: translateY(0);
@@ -5,5 +6,16 @@
 
   to {
     transform: translateY(10px);
+  }
+}
+
+/* MAIN SECTION TYPEWRITER EFFECT CURSOR ANIMATION */
+@keyframes blinkCursor {
+  0%, 75% {
+    opacity: 1;
+  }
+
+  76%, 100% {
+    opacity: 0;
   }
 }

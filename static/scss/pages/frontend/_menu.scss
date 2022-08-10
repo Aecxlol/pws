@@ -2,10 +2,14 @@ body {
   header {
     position: fixed;
     justify-content: center;
-    z-index: 2;
+    z-index: 3;
     right: 0;
     left: 0;
     top: 0;
+
+    &.active {
+      background-color: rgba(25, 28, 31, 0.8);
+    }
 
     ul {
       display: flex;
@@ -13,6 +17,13 @@ body {
 
       li {
         padding: 15px 10px;
+
+        &.active {
+
+          a {
+            color: #1E90FF;
+          }
+        }
 
         a {
           text-transform: uppercase;
