@@ -99,15 +99,15 @@ class SkillsOrderManager {
     /**
      * Builds a complete URL
      * @param path
-     * @returns {`${string}//${string}:${string|string}${string}`}
+     * @returns {`${string}//${string}${string|string}${string}`}
      * @private
      */
     _buildFullUrl = (path) => {
         const PROTOCOL  = window.location.protocol;
         const HOST_NAME = window.location.hostname;
-        const PORT      = window.location.port ?? '';
+        const PORT      = window.location.port ? `:${window.location.port}` : '';
 
-        return `${PROTOCOL}//${HOST_NAME}:${PORT}${path}`;
+        return `${PROTOCOL}//${HOST_NAME}${PORT}${path}`;
     }
 
     /**

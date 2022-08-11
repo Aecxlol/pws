@@ -10,6 +10,7 @@ class Scroller {
         this.portfolioSection = document.getElementById('portfolio-section-id');
         this.contactSection   = document.getElementById('contact-section-id');
         this.footerSection    = document.getElementById('footer-id');
+        this.backToTopBtn     = this.body.querySelector('#back-to-top-btn-id');
         this.sectionsInfos    = [];
         this.topOfTheSite     = '';
         this.oneScroll        = 98;
@@ -18,9 +19,45 @@ class Scroller {
     }
 
     init = () => {
+        this._initScrollPosition();
+        this._initScrollMarginTopForSection();
         this._initSectionsInfos();
         this._initFirstItemInMenu();
         this._manageMenu();
+    }
+
+    /**
+     * @private
+     */
+    _initScrollPosition = () => {
+        if (window.location.hash) {
+            window.location.replace(this._getUrl());
+        } else {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 100);
+        }
+    }
+
+    /**
+     * After clicking a menu's item, the scroll will stop to its destination minus the height of the menu
+     * to avoid the menu getting on the section
+     * @private
+     */
+    _initScrollMarginTopForSection = () => {
+        this.sections.forEach(section => section.style.scrollMarginTop = `${this.menu.clientHeight}px`);
+    }
+
+    /**
+     * @returns {`${string}//${string}${string|string}`}
+     * @private
+     */
+    _getUrl = () => {
+        const PROTOCOL  = window.location.protocol;
+        const HOST_NAME = window.location.hostname;
+        const PORT      = window.location.port ? `:${window.location.port}` : '';
+
+        return `${PROTOCOL}//${HOST_NAME}${PORT}`;
     }
 
     /**
@@ -29,14 +66,9 @@ class Scroller {
      * @private
      */
     _initFirstItemInMenu = () => {
-        const CURRENT_SECTION = 0;
-        const NEXT_SECTION    = 1;
         const FIRST_ITEM_MENU = 0;
 
-        if (-this.body.getBoundingClientRect().top >= this[this.sectionsInfos[CURRENT_SECTION]].offsetTop - this.menu.clientHeight
-            && -this.body.getBoundingClientRect().top < this[this.sectionsInfos[NEXT_SECTION]].offsetTop - this.menu.clientHeight) {
-            this.menuItems[FIRST_ITEM_MENU].classList.add('active');
-        }
+        this.menuItems[FIRST_ITEM_MENU].classList.add('active');
     }
 
     /**
@@ -74,8 +106,17 @@ class Scroller {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    _showBackToTopBtn = () => {
+        if (window.scrollY > this.oneScroll * 4) {
+            this.backToTopBtn.classList.add('active');
+        } else {
+            this.backToTopBtn.classList.remove('active');
+        }
+    }
+
     _manageMenu = () => {
         window.addEventListener('scroll', () => {
+            this._showBackToTopBtn();
             this._manageMenuBackground();
             this._manageMenuItemsColor();
         });
@@ -101,8 +142,8 @@ class Scroller {
         for (let currentSection = 0; currentSection < this.sectionsInfos.length - 1; currentSection++) {
             let nextSection = currentSection + 1;
 
-            if (-this.body.getBoundingClientRect().top >= this[this.sectionsInfos[currentSection]].offsetTop - this.menu.clientHeight
-                && -this.body.getBoundingClientRect().top < this[this.sectionsInfos[nextSection]].offsetTop - this.menu.clientHeight) {
+            if (-this.body.getBoundingClientRect().top >= this[this.sectionsInfos[currentSection]].offsetTop - (this.menu.clientHeight + 1)
+                && -this.body.getBoundingClientRect().top < this[this.sectionsInfos[nextSection]].offsetTop - (this.menu.clientHeight + 1)) {
                 this.menuItems[currentSection].classList.add('active');
             } else {
                 this.menuItems[currentSection].classList.remove('active');

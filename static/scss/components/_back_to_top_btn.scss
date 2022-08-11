@@ -1,0 +1,38 @@
+a.back-to-top-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .2s, opacity .6s, visibility .6s;
+  opacity: 0;
+  box-shadow:
+    rgb(0 0 0 / 25%) 0 54px 55px,
+    rgb(0 0 0 / 12%) 0 -12px 30px,
+    rgb(0 0 0 / 12%) 0 4px 6px,
+    rgb(0 0 0 / 17%) 0 12px 13px,
+    rgb(0 0 0 / 9%) 0 -3px 5px;
+
+  &:hover {
+    background-color: #1e90ff;
+
+    i {
+      color: white;
+    }
+  }
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  i {
+    color: #1e90ff;
+    transition: color .2s;
+  }
+}
