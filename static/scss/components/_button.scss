@@ -1,6 +1,6 @@
 @use "../helpers/_variables" as *;
 
-a.admin-btn-action-container, button.admin-btn-action-container {
+.generic-blue-button {
   color: $white;
   background-color: #007bff;
   padding: 10px 20px;

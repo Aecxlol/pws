@@ -1,0 +1,58 @@
+body.admin-body {
+
+  form {
+
+    div {
+
+      div {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        label {
+          color: white;
+          margin-bottom: 6px;
+        }
+
+        input, textarea, select {
+          background-color: transparent;
+          border: none;
+          padding: 10px;
+          border-radius: 2px;
+          border-bottom: 1px solid gray;
+          color: #dfdfdf;
+          transition: border-bottom-color .3s;
+
+          &:focus-visible {
+            outline: none;
+
+          }
+        }
+
+        input, textarea {
+          transition: border-bottom-color .3s;
+
+          &:focus-visible {
+            border-bottom-color: #007bff;
+          }
+        }
+
+        input::-webkit-file-upload-button {
+          color: #fff;
+          background-color: #007bff;
+          padding: 10px 20px;
+          border-radius: 3px;
+          transition: background-color .5s;
+          border-width: 0;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #0069d9;
+            border-width: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -20,7 +20,7 @@ class Helper
             $pageTitle = 'utilisateurs';
         } elseif (!!preg_match("/skills\/?[a-zA-Z0-9]*\/?[a-zA-Z0-9]*/", $pageName)) {
             $pageTitle = 'compétences';
-        } elseif (!!preg_match("/portfolio\/?[a-zA-Z0-9]*\/?[a-zA-Z0-9]*/", $pageName)) {
+        } elseif (!!preg_match("/projects\/?[a-zA-Z0-9]*\/?[a-zA-Z0-9]*/", $pageName)) {
             $pageTitle = 'portfolio';
         } else {
             $pageTitle = 'tableau de bord';

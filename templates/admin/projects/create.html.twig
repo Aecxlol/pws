@@ -1,6 +1,6 @@
 {% extends 'admin/layouts/base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
     <div class="admin-sub-title">
@@ -8,7 +8,7 @@
     </div>
 
     <div class="admin-sub-content">
-        <h5>Ajouter une compétence</h5>
+        <h5>Ajouter un projet</h5>
         {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
     </div>
 {% endblock %}

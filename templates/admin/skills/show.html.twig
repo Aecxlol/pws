@@ -1,14 +1,16 @@
 {% extends 'admin/layouts/base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
     {% set notDefined = 0 %}
-    <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+    <div class="admin-sub-title">
+        <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+    </div>
     <div class="admin-sub-content">
         <div class="btn-container">
-            <a href="{{ path('app_admin_skills_create') }}" class="admin-btn-action-container add-user-btn">Ajouter</a>
-            <a href="#" class="admin-btn-action-container define-skills-order">Définir l'odre</a>
+            <a href="{{ path('app_admin_skills_create') }}" class="generic-blue-button">Ajouter</a>
+            <a href="#" class="generic-blue-button btn-margin-left-10" id="define-skills-order">Définir l'odre</a>
         </div>
 
         <div class="skills-order-and-blur-container">
@@ -22,7 +24,7 @@
                     {% for skill in skills %}
                         {% if skill.displayOrder == notDefined %}
                             <div class="skill" draggable="true" data-skill-path="{{ path('app_admin_skills_update_display_order', {id: skill.id, order: skill.displayOrder}) }}">
-                                <img class="skill-img" src="/img/skills/{{ skill.image }}" alt="">
+                                <img class="skill-img" src="/img/upload/skills/{{ skill.image }}" alt="">
                                 <p>Ordre : <span class="skill-order-number">non défini</span></p>
                             </div>
                         {% endif %}
@@ -33,7 +35,7 @@
                     {% for skill in skills|sort((a, b) => a.displayOrder <=> b.displayOrder) %}
                         {% if skill.displayOrder %}
                             <div class="skill" draggable="true" data-skill-path="{{ path('app_admin_skills_update_display_order', {id: skill.id, order: skill.displayOrder}) }}">
-                                <img class="skill-img" src="/img/skills/{{ skill.image }}" alt="">
+                                <img class="skill-img" src="/img/upload/skills/{{ skill.image }}" alt="">
                                 <p>Ordre : <span class="skill-order-number">{{ skill.displayOrder }}</span></p>
                             </div>
                         {% endif %}
@@ -56,7 +58,7 @@
                 <tr>
                     <td>{{ skill.id }}</td>
                     <td class="uppercase"><strong>{{ skill.name }}</strong></td>
-                    <td><img class="skill-img" src="/img/skills/{{ skill.image }}" alt=""></td>
+                    <td><img class="skill-img" src="/img/upload/skills/{{ skill.image }}" alt=""></td>
                     <td>{{ skill.level }}</td>
                     <td>{{ skill.displayOrder }}</td>
                     <td class="p-relative admin-actions-col">

@@ -1,0 +1,50 @@
+{% extends 'admin/layouts/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="admin-sub-title">
+        <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+    </div>
+
+    <div class="admin-sub-content">
+        <div class="btn-container">
+            <a href="{{ path('app_admin_projects_create') }}" class="generic-blue-button">Ajouter</a>
+        </div>
+        <table class="admin-table projects">
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Logo</th>
+                <th>Lien</th>
+                <th>Lien Git</th>
+                <th>Images</th>
+{#                <th>Actions</th>#}
+            </tr>
+            {% for project in projects %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td class="uppercase"><strong>{{ project.name }}</strong></td>
+                    <td>{{ project.description }}</td>
+                    <td><img class="skill-img" src="/img/upload/projects/{{ project.logo }}" alt=""></td>
+                    <td>{{ project.link }}</td>
+                    <td>{{ project.gitLink }}</td>
+                    <td>
+                        {% for image in project.images %}
+                            <img src="/img/upload/projects/{{ image.url }}" class="skill-img" alt="">
+                        {% endfor %}
+                    </td>
+{#                    <td class="p-relative admin-actions-col">#}
+{#                        <i class="fa-solid fa-ellipsis admin-actions-btn admin-actions-btn-id-{{ project.id }}"></i>#}
+{#                        <div class="admin-popup-actions p-absolute popup-id-{{ project.id }}">#}
+{#                            <a class="greyNinety" href="{{ path('app_admin_skills_update', { id: project.id }) }}">Éditer</a>#}
+{#                            <hr>#}
+{#                            <a class="greyNinety" href="{{ path('app_admin_skills_delete', { id: project.id }) }}">Supprimer</a>#}
+{#                        </div>#}
+{#                    </td>#}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

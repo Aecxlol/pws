@@ -18,7 +18,6 @@ class UsersController extends AbstractController
 
     public function __construct(private UserRepository $userRepository, private RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
         $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 

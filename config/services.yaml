@@ -8,7 +8,7 @@ parameters:
   app.login_path: '/MZzBU6EbJ31wZeehonk5'
   app.contact_email: 'damienweb@contact.com'
   app.name: 'DamienWeb'
-#  skill_images_directory: '%kernel.project_dir%/static/img/skills'
+  app.images_directory: '%kernel.project_dir%/public/img/upload/'
 
 when@dev:
     parameters:
@@ -30,9 +30,10 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-#    App\Service\FileUploader:
-#        arguments:
-#            $targetDirectory: '%skill_images_directory%'
+    # var used in the FileUploader constructor service
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%app.images_directory%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

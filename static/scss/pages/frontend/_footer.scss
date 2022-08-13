@@ -1,6 +1,6 @@
 footer.footer {
   padding: 20px 0;
-  background-color: #dddddd;
+  background-color: #002C58;
 
   div.social-medias {
     display: flex;
@@ -9,12 +9,12 @@ footer.footer {
 
     a {
       padding: 13px;
-      background-color: #c5c5c5;
+      background-color: white;
       border-radius: 50%;
       transition: background-color .3s;
 
       &:hover {
-        background-color: #b7b7b7;
+        background-color: #aaa;
       }
 
       &:nth-child(2) {
@@ -23,7 +23,7 @@ footer.footer {
 
       i {
         font-size: 23px;
-        color: #6590b7;
+        color: #002C58;
       }
     }
   }
@@ -31,6 +31,7 @@ footer.footer {
   p.copyright {
     text-align: center;
     margin: 0;
+    color: #FFFFFF;
     letter-spacing: 1px;
   }
 }

@@ -8,6 +8,7 @@ use App\Helper\Helper;
 use App\Repository\SkillRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,6 @@ class SkillsController extends AbstractController
 
     public function __construct(private SkillRepository $skillRepository, private RequestStack $requestStack, private SluggerInterface $slugger)
     {
-        $this->requestStack = $requestStack;
         $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
@@ -36,19 +36,21 @@ class SkillsController extends AbstractController
     }
 
     #[Route('/admin/skills/create', name: 'app_admin_skills_create', methods: ['GET', 'POST'])]
-    public function create(Request $request): Response
+    public function create(Request $request, FileUploader $fileUploader): Response
     {
         $skill = new Skill();
         $form  = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $skillImage */
             $skillImage = $form->get('image')->getData();
 
+            # this condition is mandatory since the image field is not required
             if ($skillImage) {
-                $fileUploader   = new FileUploader('img/skills', $this->slugger);
                 $skillImageName = $fileUploader->upload($skillImage);
                 $skill->setImage($skillImageName);
+                $skill->setDisplayOrder(0);
                 $skill = $form->getData();
 
                 $this->skillRepository->add($skill, flush: true);

@@ -12,14 +12,20 @@ body {
         color: $white;
       }
     }
+
     &.admin-menu {
       li {
         padding: 11px 0;
         a {
           color: $greySeventyOne;
           padding: 10px 20px 10px 10px;
+          transition: background-color .2s;
 
           &.active {
+            background-color: #4a4a4a;
+          }
+
+          &:hover {
             background-color: #4a4a4a;
           }
 

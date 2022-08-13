@@ -1,8 +1,8 @@
 div.login-form-container {
   display: grid;
   height: 100vh;
-  grid-template-columns: 1fr 500px 1fr;
-  grid-template-rows: 1fr 600px 1fr;
+  grid-template-columns: 1fr 400px 1fr;
+  grid-template-rows: 1fr 400px 1fr;
   grid-template-areas:
       ". . ."
       ". form ."
@@ -25,7 +25,7 @@ div.login-form-container {
 
     h1 {
       text-align: center;
-      margin-bottom: 70px;
+      margin: 0 0 40px 0;
     }
 
     label {
@@ -33,27 +33,17 @@ div.login-form-container {
     }
 
     input.form-control {
-      //border: none;
-      margin-bottom: 40px;
-      padding: 15px;
-      font-size: 20px;
-      position: relative;
-      letter-spacing: 1px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 15px 0;
+      padding: 10px;
       font-size: 15px;
-      cursor: pointer;
-      border-radius: 2px;
-      font-weight: bold;
+      border: none;
+      border-bottom: 1px solid #d7d7d7;
+      transition: background-color .3s;
+      margin-bottom: 35px;
       letter-spacing: 1px;
 
-      &:hover {
-        background-color: #0069d9;
+      &:focus-visible {
+        outline: none;
+        background-color: #f6f6f6;
       }
     }
   }

@@ -5,7 +5,9 @@
 {% block body %}
     <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
     <div class="admin-sub-content">
-        <a href="{{ path('app_admin_users_create') }}" class="admin-btn-action-container add-user-btn">Ajouter</a>
+        <div class="btn-container">
+            <a href="{{ path('app_admin_users_create') }}" class="generic-blue-button">Ajouter</a>
+        </div>
         <table class="admin-table">
             <tr>
                 <th>Id</th>

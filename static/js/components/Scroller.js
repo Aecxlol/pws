@@ -45,7 +45,9 @@ class Scroller {
      * @private
      */
     _initScrollMarginTopForSection = () => {
-        this.sections.forEach(section => section.style.scrollMarginTop = `${this.menu.clientHeight}px`);
+        const MENU_HEIGHT_WHEN_ACTIVE = '60';
+
+        this.sections.forEach(section => section.style.scrollMarginTop = `${MENU_HEIGHT_WHEN_ACTIVE}px`);
     }
 
     /**

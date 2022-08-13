@@ -1,0 +1,66 @@
+@use "../../helpers/variables" as *;
+
+body.admin-body {
+  background-color: $darkGrey;
+
+  div.admin-container {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-template-rows: minmax(100vh, auto);
+    grid-template-areas:
+      "admin-sidebar admin-content";
+
+    div.admin-sidebar {
+      grid-area: admin-sidebar;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background-color: $greyNineteen;
+      padding: 20px;
+    }
+
+    div.admin-content {
+      grid-area: admin-content;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 120px 60px auto;
+      grid-template-areas:
+        "admin-main-title"
+        "admin-sub-title"
+        "admin-sub-content";
+
+      div.admin-main-title {
+        grid-area: admin-main-title;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      div.admin-sub-title {
+        grid-area: admin-sub-title;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h4 {
+          margin: 0;
+        }
+      }
+
+      div.admin-sub-content {
+        grid-area: admin-sub-content;
+        width: 1200px;
+        max-width: 1200px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 75px;
+
+        div.btn-container {
+          display: flex;
+          justify-content: flex-end;
+        }
+      }
+
+    }
+  }
+}
