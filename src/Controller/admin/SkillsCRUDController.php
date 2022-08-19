@@ -15,15 +15,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class SkillsController extends AbstractController
+class SkillsCRUDController extends AbstractController
 {
+    /**
+     * @var string
+     */
     private string $currentPage;
 
+    /**
+     * @param SkillRepository $skillRepository
+     * @param RequestStack $requestStack
+     * @param SluggerInterface $slugger
+     */
     public function __construct(private SkillRepository $skillRepository, private RequestStack $requestStack, private SluggerInterface $slugger)
     {
         $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
+    /**
+     * @return Response
+     */
     #[Route('/admin/skills', name: 'app_admin_skills', methods: 'GET')]
     public function index(): Response
     {
@@ -35,6 +46,11 @@ class SkillsController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @return Response
+     */
     #[Route('/admin/skills/create', name: 'app_admin_skills_create', methods: ['GET', 'POST'])]
     public function create(Request $request, FileUploader $fileUploader): Response
     {
@@ -54,7 +70,7 @@ class SkillsController extends AbstractController
                 $skill = $form->getData();
 
                 $this->skillRepository->add($skill, flush: true);
-                $this->addFlash('success', "La compétence {$skill->getName()} a bien été ajoutée");
+                $this->addFlash('success', "La compétence <strong>{$skill->getName()}</strong> a bien été ajoutée");
 
                 return $this->redirectToRoute('app_admin_skills');
             }
@@ -67,6 +83,11 @@ class SkillsController extends AbstractController
         ]);
     }
 
+    /**
+     * @param int $id
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/admin/skills/update/{id}', name: 'app_admin_skills_update', methods: ['GET', 'POST'])]
     public function update(int $id, Request $request): Response
     {
@@ -77,7 +98,7 @@ class SkillsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $skill = $form->getData();
             $this->skillRepository->add($skill, flush: true);
-            $this->addFlash('success', "La compétence {$skill->getName()} a bien été éditée");
+            $this->addFlash('success', "La compétence <strong>{$skill->getName()}</strong> a bien été éditée");
 
             return $this->redirectToRoute('app_admin_skills');
         }
@@ -86,9 +107,12 @@ class SkillsController extends AbstractController
             'skill' => $skill,
             'form' => $form->createView()
         ]);
-
     }
 
+    /**
+     * @param int $id
+     * @return Response
+     */
     #[Route('/admin/skills/delete/{id}', name: 'app_admin_skills_delete', options: ['expose' => true], methods: 'GET')]
     public function delete(int $id): Response
     {
@@ -100,10 +124,15 @@ class SkillsController extends AbstractController
             unlink($file);
         }
 
-        $this->addFlash('success', "La compétence {$skill->getName()} a bien été supprimée");
+        $this->addFlash('success', "La compétence <strong>{$skill->getName()}</strong> a bien été supprimée");
         return $this->redirectToRoute('app_admin_skills');
     }
 
+    /**
+     * @param int $id
+     * @param int $order
+     * @return Response
+     */
     #[Route('/admin/skills/update/{id}/displayOrder/{order}', name: 'app_admin_skills_update_display_order', methods: ['GET', 'POST'])]
     public function updateDisplayOrder(int $id, int $order): Response
     {

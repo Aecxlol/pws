@@ -26,5 +26,8 @@
     "url": "https://github.com/DamienA062/pws"
   },
   "author": "Damien A. damienweb062@gmail.com https://damienweb062.com",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "cropperjs": "^1.5.12"
+  }
 }

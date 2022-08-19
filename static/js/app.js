@@ -1,20 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let body = document.querySelector("body");
+    /**
+     * @type {HTMLElement}
+     */
+    const BODY = document.body;
+
     /* FRONTEND */
-    if(body.classList.contains('front-body')) {
-        new Scroller();
-        new TypeWriter();
+    if (BODY.classList.contains('front-body')) {
+        if (BODY.classList.contains('single-project')) {
+            new Slider(BODY);
+        } else {
+            new Scroller();
+            new TypeWriter();
+        }
     }
 
     /* ADMIN */
-    if (body.classList.contains('admin-body')) {
+    if (BODY.classList.contains('admin-body')) {
+        // new MyCropper();
         /* USERS AND SKILLS PAGES */
-        if (body.classList.contains('path-admin-users') || body.classList.contains('path-admin-skills')) {
+        if (BODY.classList.contains('path-admin-users') || BODY.classList.contains('path-admin-skills')) {
             new EditDeletePopupManager();
         }
 
         /* SKILLS PAGE */
-        if(body.classList.contains('path-admin-skills')) {
+        if (BODY.classList.contains('path-admin-skills')) {
             new SkillsOrderManager();
         }
 

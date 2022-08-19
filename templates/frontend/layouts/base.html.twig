@@ -18,10 +18,15 @@
             <script src="/js/main.js" defer></script>
 {#            {{ encore_entry_script_tags('app') }}#}
         {% endblock %}
-        </head>
-        <body class="front-body">
-            {% block body %}
+    </head>
+    {# if the pathinfo matches /portfolio/something-something- etc #}
+    <body class="front-body {% if app.request.pathInfo matches '#\/portfolio\/(?:[a-z]+-?){1,}#' %}single-project{% endif %}">
+        {# MENU #}
+        {{ include('/frontend/section/menu.html.twig') }}
 
-            {% endblock %}
-        </body>
+        {% block body %}{% endblock %}
+
+        {# FOOTER #}
+        {{ include('/frontend/section/footer.html.twig') }}
+    </body>
 </html>

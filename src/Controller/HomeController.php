@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\Type\ContactType;
+use App\Repository\ProjectRepository;
 use App\Repository\SkillRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
@@ -16,21 +17,26 @@ class HomeController extends AbstractController
 {
     /**
      * @param SkillRepository $skillRepository
+     * @param ProjectRepository $projectRepository
      * @param Request $request
      * @param Email $email
      * @return Response
      */
     #[Route('/', name: 'app_home')]
-    public function index(SkillRepository $skillRepository, Request $request, Email $email): Response
+    public function index(SkillRepository $skillRepository, ProjectRepository $projectRepository, Request $request, Email $email): Response
     {
         # SKILLS SECTION
         $skills = $this->getSkills($skillRepository);
+
+        # PORTFOLIO SECTION
+        $projects = $this->getProjects($projectRepository);
         
         # CONTACT SECTION
         $form = $this->showContactForm($request, $email);
 
         return $this->render('frontend/index.html.twig', [
             'skills' => $skills,
+            'projects' => $projects,
             'form' => $form->createView()
         ]);
     }
@@ -42,6 +48,15 @@ class HomeController extends AbstractController
     private function getSkills($skillRepository): mixed
     {
         return $skillRepository->findAll();
+    }
+
+    /**
+     * @param $projectRepository
+     * @return mixed
+     */
+    private function getProjects($projectRepository): mixed
+    {
+        return $projectRepository->findAll();
     }
 
     /**

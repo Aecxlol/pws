@@ -18,13 +18,23 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ProjectsCRUDController extends AbstractController
 {
+    /**
+     * @var string
+     */
     private string $currentPage;
 
+    /**
+     * @param ProjectRepository $projectRepository
+     * @param RequestStack $requestStack
+     */
     public function __construct(private ProjectRepository $projectRepository, private RequestStack $requestStack)
     {
         $this->currentPage = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
+    /**
+     * @return Response
+     */
     #[Route('/admin/projects', name: 'app_admin_projects')]
     public function index(): Response
     {
@@ -36,10 +46,14 @@ class ProjectsCRUDController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @return Response
+     */
     #[Route('/admin/projects/create', name: 'app_admin_projects_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, FileUploader $fileUploader): Response
+    public function create(Request $request, FileUploader $fileUploader, SluggerInterface $slugger): Response
     {
-
         $project = new Project();
         $form    = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
@@ -56,6 +70,7 @@ class ProjectsCRUDController extends AbstractController
                 # uploads the file and sets a unique name to the file
                 $projectLogoFileName = $fileUploader->upload($projectLogoFile);
                 $project->setLogo($projectLogoFileName);
+                $project->setSlug($slugger->slug($form->getName()));
 
                 foreach ($projectImagesFiles as $projectImagesFile) {
                     $projectImagesFileName = $fileUploader->upload($projectImagesFile);
@@ -68,7 +83,7 @@ class ProjectsCRUDController extends AbstractController
             }
 
             $this->projectRepository->add($project, flush: true);
-            $this->addFlash('success', "Le projet {$project->getName()} a bien été ajouté");
+            $this->addFlash('success', "Le projet <strong>{$project->getName()}</strong> a bien été ajouté");
 
             return $this->redirectToRoute('app_admin_projects');
         }

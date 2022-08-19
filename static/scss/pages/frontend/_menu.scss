@@ -1,4 +1,12 @@
 body {
+
+  &.single-project {
+
+    header  {
+      background-color: rgba(25, 28, 31, 0.8);
+    }
+  }
+
   header {
     height: 82px;
     display: flex;

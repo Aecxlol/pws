@@ -38,6 +38,9 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Image::class, cascade: ["persist"])]
     private Collection $images;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -146,6 +149,18 @@ class Project
                 $images->setProject(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

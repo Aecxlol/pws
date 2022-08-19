@@ -17,6 +17,19 @@ body.admin-body {
       height: 100vh;
       background-color: $greyNineteen;
       padding: 20px;
+
+      div.admin-logo-and-website-name-container {
+        display: flex;
+        align-items: center;
+
+        img {
+          width: 13%;
+        }
+
+        p {
+          margin-left: 12px;
+        }
+      }
     }
 
     div.admin-content {

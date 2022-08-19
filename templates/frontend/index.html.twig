@@ -3,8 +3,6 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    {# MENU #}
-    {{ include('/frontend/section/menu.html.twig') }}
     <main id="main">
         {# MAIN SECTION #}
         {{ include('/frontend/section/main.html.twig') }}
@@ -21,9 +19,6 @@
         {# CONTACT SECTION #}
         {{ include('/frontend/section/contact.html.twig') }}
     </main>
-
-    {# FOOTER #}
-    {{ include('/frontend/section/footer.html.twig') }}
 
     {# BACK TO TOP BUTTON #}
     {{ include('/frontend/partials/_back_to_top.html.twig') }}

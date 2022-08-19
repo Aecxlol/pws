@@ -5,12 +5,12 @@ class HighlightAdminMenuItem {
         this.bodyClassesName  = this.body.className;
         this.pathName         = null;
         this.pagePathName     = null;
-        this.pattern          = /^path-admin-?[a-z]*$/;
+        this.pattern          = /^path-admin-?[a-z]*-?[a-z]*$/;
         this.classAttribution = {
             'path-admin': 'admin-menu-item-dashboard',
             'path-admin-users': 'admin-menu-item-users',
             'path-admin-skills': 'admin-menu-item-skills',
-            'path-admin-portfolio': 'admin-menu-item-portfolio',
+            'path-admin-projects': 'admin-menu-item-portfolio',
         };
 
         this.init()
@@ -24,7 +24,7 @@ class HighlightAdminMenuItem {
      * @private
      */
     _highlightMenuItem = () => {
-        if (this._bodyContainsAPathClass()) {
+        if (this._bodyContainsAnAdminPath()) {
             for (let i = 0; i < this.menuItems.length; i++) {
                 if (this.menuItems[i].classList.contains(this.classAttribution[this.pagePathName])) {
                     if (this.menuItems[i].classList.contains('active')) {
@@ -43,7 +43,7 @@ class HighlightAdminMenuItem {
      * @returns {boolean}
      * @private
      */
-    _bodyContainsAPathClass = () => {
+    _bodyContainsAnAdminPath = () => {
         // loop over every class of the body
         for (let i = 0; i < this.bodyClassesName.split(' ').length; i++) {
             // if one of them contains the following pattern (path-admin(-something))
@@ -52,6 +52,14 @@ class HighlightAdminMenuItem {
                 this.pathName     = i;
                 // extracts it from the array
                 this.pagePathName = this.bodyClassesName.split(' ')[this.pathName];
+
+                // if the path is something like path-admin-users-create
+                if (this.pagePathName.split('-').length === 4) {
+                    // only get the first three words (path admin and users)
+                    const SPLIT_PATH_NAME = this.pagePathName.split('-').splice(0, 3);
+                    // and then concatenate them with a dash (path-admin-users)
+                    this.pagePathName     = SPLIT_PATH_NAME.join('-');
+                }
                 return true;
             }
         }

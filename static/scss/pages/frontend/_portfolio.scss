@@ -1,0 +1,111 @@
+section.portfolio-section {
+
+  div.projects-container {
+    display: grid;
+    grid-template-rows: repeat(2, 250px);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+
+    div.project-container {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+
+      &:hover {
+
+        img.project-logo {
+          transform: translate(-50%, -50%) scale(1.3);
+        }
+
+        div.project-hover {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgb(0 0 0 / 80%);
+        backdrop-filter: blur(5px);
+      }
+
+      img.project-bg {
+        width: 100%;
+
+      }
+
+      img.project-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 35%;
+        transition: transform .2s ease-in-out;
+      }
+
+      div.project-hover {
+        display: flex;
+        background-color: #002c58;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .3s ease-in-out;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        p.project-description {
+          font-size: 16px;
+          color: white;
+          margin: 0 0 20px;
+          text-align: center;
+          padding: 0 30px;
+        }
+
+        a.website-link {
+          color: white;
+          padding: 10px 20px;
+          border: 1px solid cornflowerblue;
+          border-radius: 20px;
+          transition: background-color .2s;
+
+          &:hover {
+            background-color: cornflowerblue;
+          }
+        }
+
+        div.others-links {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #416183;
+          border-radius: 12px 0 0 0;
+          height: 45px;
+          width: 25%;
+
+          a {
+            color: white;
+            margin: 0 5px;
+            filter: drop-shadow(2px 4px 6px black);
+
+            i {
+              font-size: 25px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

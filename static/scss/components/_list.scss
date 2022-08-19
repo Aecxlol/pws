@@ -20,6 +20,7 @@ body {
           color: $greySeventyOne;
           padding: 10px 20px 10px 10px;
           transition: background-color .2s;
+          font-size: 14px;
 
           &.active {
             background-color: #4a4a4a;

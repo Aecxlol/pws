@@ -1,5 +1,25 @@
+{% set projectImagesDirectory = 'img/upload/projects/' %}
+
 <section class="portfolio-section" id="portfolio-section-id">
     <h2>Portoflio</h2>
     <h3>Ce que j'ai pu réaliser</h3>
+    <div class="projects-container">
+        {% for project in projects %}
+             <div class="project-container">
+                 <img src="{{ projectImagesDirectory ~ project.images[0].url }}" alt="" class="project-bg">
+                 <img src="{{ projectImagesDirectory ~ project.logo }}" alt="" class="project-logo">
 
+                 <div class="project-hover">
+                     <p class="project-description">{{ project.description|u.truncate(50, '...', false) }}</p>
+                     <a href="{{ project.link }}" target="_blank" class="website-link">Visiter le site <i class="fa-solid fa-caret-right"></i></a>
+                     <div class="others-links">
+                         {% if project.gitLink %}
+                             <a href="{{ project.gitLink }}" title="Lien GitHub"><i class="fa-brands fa-github"></i></a>
+                         {% endif %}
+                         <a href="{{ path('app_portfolio', { slug: project.slug }) }}" title="Plus d'infos"><i class="fa-solid fa-circle-info"></i></a>
+                     </div>
+                 </div>
+             </div>
+        {% endfor %}
+    </div>
 </section>

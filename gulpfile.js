@@ -5,7 +5,6 @@ const sass         = require('gulp-sass')(require('sass'));
 const postcss      = require('gulp-postcss');
 const cssnano      = require('gulp-cssnano');
 const browserSync  = require('browser-sync').create();
-const sourcemaps   = require('gulp-sourcemaps');
 const concat       = require('gulp-concat');
 // Avoids bug
 const plumber      = require('gulp-plumber');
@@ -28,9 +27,9 @@ const jsFolder   = 'static/js/**/*.js';
 //====================CONFIG=========================//
 //===================================================//
 let cfg = {
-          mainScssFile: 'app.scss',
-          destinationFolder: 'public'
-      }
+    destinationFolder: 'public',
+    proxy: '127.0.0.1:8000'
+}
 
 let workFiles = {
     css: {
@@ -54,14 +53,12 @@ let workFiles = {
  */
 let scssTask = () => {
 
-    return gulp.src(scssFolder, {sourceMap: true})
-        .pipe(sourcemaps.init())
+    return gulp.src(scssFolder, {sourcemaps: true})
         .pipe(sass())
-        .pipe(concat(workFiles.css.destinationFileName))
         .pipe(postcss([autoPrefixer()]))
+        .pipe(concat(workFiles.css.destinationFileName))
         .pipe(cssnano())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(workFiles.css.destinationFolder, {sourceMap: '.'}));
+        .pipe(gulp.dest(workFiles.css.destinationFolder, {sourcemaps: '.'}));
 }
 
 /**
@@ -69,23 +66,32 @@ let scssTask = () => {
  * @returns {*}
  */
 let jsTask = () => {
-    return gulp.src(jsFolder)
+    return gulp.src(jsFolder, {sourcemaps: true})
         .pipe(plumber())
-        .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat(workFiles.js.destinationFileName))
         .pipe(uglify())
-        .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest(workFiles.js.destinationFolder));
+        .pipe(gulp.dest(workFiles.js.destinationFolder, {sourcemaps: '.'}));
+}
+
+/**
+ * @param done
+ */
+let browsersyncServe = (done) => {
+    browserSync.init({
+        proxy: cfg.proxy
+    });
+    // callback function  that signifies the function is complete
+    done();
 }
 
 /**
  * BROWSER SYNC RELOAD
- * @param cb
+ * @param done
  */
-let browserSyncReload = (cb) => {
+let browserSyncReload = (done) => {
     browserSync.reload();
-    cb();
+    done();
 }
 
 /**
@@ -102,5 +108,6 @@ let watchTask = () => {
 exports.default = gulp.series(
     scssTask,
     jsTask,
+    // browsersyncServe,
     watchTask
 );

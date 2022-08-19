@@ -12,15 +12,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UsersController extends AbstractController
+class UsersCRUDController extends AbstractController
 {
+    /**
+     * @var string
+     */
     private string $currentPage;
 
+    /**
+     * @param UserRepository $userRepository
+     * @param RequestStack $requestStack
+     */
     public function __construct(private UserRepository $userRepository, private RequestStack $requestStack)
     {
         $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
+    /**
+     * @return Response
+     */
     #[Route('/admin/users', name: 'app_admin_users', methods: 'GET')]
     public function index(): Response
     {
@@ -32,6 +42,10 @@ class UsersController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/admin/users/create', name: 'app_admin_users_create', methods: ['GET', 'POST'])]
     public function create(Request $request): Response
     {
@@ -42,7 +56,7 @@ class UsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
             $this->userRepository->add($user, flush: true);
-            $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été ajouté");
+            $this->addFlash('success', "L'utilisateur <strong>{$user->getName()}</strong> a bien été ajouté");
 
             return $this->redirectToRoute('app_admin_users');
         }
@@ -68,7 +82,7 @@ class UsersController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
             $this->userRepository->add($user, flush: true);
-            $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été édité");
+            $this->addFlash('success', "L'utilisateur <strong>{$user->getName()}</strong> a bien été édité");
 
             return $this->redirectToRoute('app_admin_users');
         }
@@ -88,7 +102,7 @@ class UsersController extends AbstractController
     {
         $user = $this->userRepository->findOneBy(compact('id'));
         $this->userRepository->remove($user, flush: true);
-        $this->addFlash('success', "L'utilisateur {$user->getName()} a bien été supprimé");
+        $this->addFlash('success', "L'utilisateur <strong>{$user->getName()}</strong> a bien été supprimé");
 
         return $this->redirectToRoute('app_admin_users');
     }

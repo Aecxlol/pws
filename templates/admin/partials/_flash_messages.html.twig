@@ -2,7 +2,7 @@
     {% for message in messages %}
         <div class="alert alert-{{ type }}" role="alert">
             {% if type == 'success' %}
-                <i class="fa-solid fa-check"></i> {{ message }}.
+                <i class="fa-solid fa-check"></i> <p>{{ message }}</p>.
             {% endif %}
         </div>
     {% endfor %}

@@ -1,6 +1,19 @@
 div.alert-success {
   background-color: #198754;
-  color: white;
+  color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 22px;
+  position: fixed;
+  bottom: 44px;
+  right: 56px;
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+
+  i {
+    margin-right: 8px;
+  }
 }
