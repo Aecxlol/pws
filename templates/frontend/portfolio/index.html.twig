@@ -1,0 +1,35 @@
+{% extends 'frontend/layouts/base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <section class="single-project-section">
+        <h2>Projet : {{ project.name }}</h2>
+        <div class="container">
+            <figure>
+                <img src="/img/upload/projects/{{ project.logo }}" alt="logo du projet">
+            </figure>
+            <p>Description du projet : {{ project.description }}</p>
+            <p>Lien vers le site : <a href="{{ project.link }}" target="_blank">{{ project.link }}</a></p>
+            <p>Lien du repository GIT : {% if project.gitLink %}<a href="{{ project.gitLink }}" target="_blank">{{ project.gitLink }}</a>{% else %}<span>privé</span>{% endif %}</p>
+            <div class="single-project-images">
+                <p>Images du site</p>
+                <div class="carousel">
+                    <div class="slider">
+                        {% for image in project.images %}
+                            <img src="/img/upload/projects/{{ image.url }}" alt="image du projet {{ project.name }}" data-slide-number="{{ loop.index }}">
+                        {% endfor %}
+                    </div>
+                    <div class="prev-next-container">
+                        <div id="previous-slide" class="slider-btn previous">
+                            <i class="fa-solid fa-angle-left"></i>
+                        </div>
+                        <div id="next-slide" class="slider-btn next">
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
