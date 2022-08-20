@@ -5,8 +5,9 @@
 {% block body %}
     {% set notDefined = 0 %}
     <div class="admin-sub-title">
-        <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+        <h2 class="white padding-30">{{ currentPage }}</h2>
     </div>
+
     <div class="admin-sub-content">
         <div class="btn-container">
             <a href="{{ path('app_admin_skills_create') }}" class="generic-blue-button">Ajouter</a>

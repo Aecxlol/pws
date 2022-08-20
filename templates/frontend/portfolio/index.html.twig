@@ -28,6 +28,15 @@
                             <i class="fa-solid fa-angle-right"></i>
                         </div>
                     </div>
+                    <div class="dots-navigation">
+                        {% for image in project.images %}
+                            {% if loop.index == 1 %}
+                                <div class="dot active"></div>
+                            {% else %}
+                                <div class="dot"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

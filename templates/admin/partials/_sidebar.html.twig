@@ -1,8 +1,8 @@
 <div class="admin-sidebar">
-    <div class="admin-logo-and-website-name-container"><img src="{{ asset('img/logo/logo.jpg') }}" alt=""><p class="white">DamienWeb</p></div>
+    <div class="admin-logo-and-website-name-container">
+        <img src="{{ asset('img/logo/logo.jpg') }}" alt="logo damienweb">
+        <p class="white">{{ app_name }}</p>
+    </div>
 
-    <p class="white no-margin">Bonjour <strong>{{ app.user.name }}</strong></p>
-    <p class="white"><i class="fa-solid fa-caret-right"></i> Environnement<strong class="uppercase" style="color: #ff4949;"> {{ app.environment }}</strong></p>
-    <h2 class="white uppercase greyNinety">menu</h2>
     {{ include('admin/partials/_menu.html.twig') }}
 </div>

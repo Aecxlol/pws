@@ -1,9 +1,13 @@
 {% extends 'admin/layouts/base.html.twig' %}
 
-{% block title %}Hello DashboardController!{% endblock %}
-
 {% block body %}
-    <h1>Éditer l'utilisateur {{ user.name }}</h1>
+    <div class="admin-sub-title">
+        <h2 class="white padding-30">{{ currentPage }}</h2>
+    </div>
 
-    {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
+    <div class="admin-sub-content">
+        <h3>Éditer l'utilisateur {{ user.name }}</h3>
+
+        {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
+    </div>
 {% endblock %}

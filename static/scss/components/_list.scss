@@ -5,6 +5,7 @@ body {
   ul {
     list-style-type: none;
     padding: 0;
+    margin-top: 50px;
 
     li {
 
@@ -14,10 +15,12 @@ body {
     }
 
     &.admin-menu {
+
       li {
-        padding: 11px 0;
+        padding: 20px 0 20px 30px;
+
         a {
-          color: $greySeventyOne;
+          color: white;
           padding: 10px 20px 10px 10px;
           transition: background-color .2s;
           font-size: 14px;

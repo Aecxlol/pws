@@ -14,17 +14,18 @@ section.single-project-section {
 
       div.carousel {
         position: relative;
+        width: 575px;
+        margin: 0 auto 70px;
 
         div.slider {
           display: flex;
           overflow: hidden;
           position: relative;
-          width: 300px;
 
           img {
-            width: 300px;
-            height: 300px;
-            transition: opacity 1s;
+            width: 575px;
+            height: auto;
+            transition: opacity .4s;
             opacity: 0;
 
             &.active {
@@ -41,21 +42,51 @@ section.single-project-section {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 50px;
-            height: 50px;
+            width: 35px;
+            height: 35px;
             cursor: pointer;
             z-index: 4;
+            background-color: #002c58;
+            color: white;
+            border-radius: 50%;
 
             i {
-              font-size: 26px;
+              font-size: 17px;
             }
 
             &.previous {
-              left: 0;
+              left: -60px;
             }
 
             &.next {
-              right: 0;
+              right: -60px;
+            }
+          }
+        }
+
+        div.dots-navigation {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          bottom: -26px;
+          left: calc(50% - (60px/2));
+
+          div.dot {
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: #cdcdcd;
+            cursor: pointer;
+            transition: background-color .3s;
+
+            &:hover {
+              background-color: #002c58;
+            }
+
+            &.active {
+              background-color: #002c58;
             }
           }
         }

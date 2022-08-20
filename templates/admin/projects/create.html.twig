@@ -1,14 +1,12 @@
 {% extends 'admin/layouts/base.html.twig' %}
 
-{% block title %}{% endblock %}
-
 {% block body %}
     <div class="admin-sub-title">
-        <h4 class="white text-center admin-parts-title">Partie {{ currentPage }}</h4>
+        <h2 class="white padding-30">{{ currentPage }}</h2>
     </div>
 
     <div class="admin-sub-content">
-        <h5>Ajouter un projet</h5>
+        <h3 class="white">Ajouter un projet</h3>
         {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
         <div>
             <img id="image" src="{{ asset('img/logo/logo.jpg') }}">

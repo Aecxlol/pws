@@ -20,7 +20,7 @@
         {% endblock %}
     </head>
     {# if the pathinfo matches /portfolio/something-something- etc #}
-    <body class="front-body {% if app.request.pathInfo matches '#\/portfolio\/(?:[a-z]+-?){1,}#' %}single-project{% endif %}">
+    <body class="front-body{% if app.request.pathInfo matches '#\/portfolio\/(?:[a-z]+-?){1,}#' %} single-project{% endif %} {{ app.request.pathInfo|replace({ '/': '' }) }}">
         {# MENU #}
         {{ include('/frontend/section/menu.html.twig') }}
 

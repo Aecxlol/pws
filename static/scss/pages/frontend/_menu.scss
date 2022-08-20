@@ -1,9 +1,16 @@
-body {
+body.front-body {
 
   &.single-project {
 
     header  {
       background-color: rgba(25, 28, 31, 0.8);
+    }
+  }
+
+  &.login {
+
+    header {
+      display: none;
     }
   }
 
@@ -27,6 +34,7 @@ body {
     ul {
       display: flex;
       justify-content: space-between;
+      margin: 0;
 
       li {
 

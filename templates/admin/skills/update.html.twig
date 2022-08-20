@@ -3,7 +3,13 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-    <h1>Éditer la compétence {{ skill.name }}</h1>
+    <div class="admin-sub-title">
+        <h2 class="white padding-30">{{ currentPage }}</h2>
+    </div>
 
-    {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
+    <div class="admin-sub-content">
+        <h1>Éditer la compétence {{ skill.name }}</h1>
+
+        {{ include ('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Éditer' }) }}
+    </div>
 {% endblock %}

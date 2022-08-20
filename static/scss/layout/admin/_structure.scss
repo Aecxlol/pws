@@ -16,18 +16,21 @@ body.admin-body {
       top: 0;
       height: 100vh;
       background-color: $greyNineteen;
-      padding: 20px;
 
       div.admin-logo-and-website-name-container {
         display: flex;
         align-items: center;
+        background-color: #002c58;
+        justify-content: center;
+        height: 75px;
 
         img {
-          width: 13%;
+          width: 9%;
+          margin-left: -30px;
         }
 
         p {
-          margin-left: 12px;
+          margin: 0 0 0 10px;
         }
       }
     }
@@ -35,12 +38,28 @@ body.admin-body {
     div.admin-content {
       grid-area: admin-content;
       display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 120px 60px auto;
+      grid-template-columns: 1fr 1200px 1fr;
+      grid-template-rows: 75px repeat(2, min-content);
       grid-template-areas:
-        "admin-main-title"
-        "admin-sub-title"
-        "admin-sub-content";
+              "admin-top-infos admin-top-infos admin-top-infos"
+              ". admin-main-title ."
+              ". admin-sub-title ."
+              ". admin-sub-content ."
+      ;
+
+      div.admin-top-infos {
+        grid-area: admin-top-infos;
+        background-color: #416183;
+
+        div.admin-top-infos-child {
+          width: 1200px;
+          height: 100%;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+      }
 
       div.admin-main-title {
         grid-area: admin-main-title;
@@ -53,7 +72,7 @@ body.admin-body {
         grid-area: admin-sub-title;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
 
         h4 {
           margin: 0;
