@@ -15,7 +15,7 @@ class Slider {
     }
 
     init = () => {
-        this._initSlide();
+        this._showCurrentImage();
         this._slide();
     }
 
@@ -28,7 +28,7 @@ class Slider {
             // hides all the images
             this._hideSliderImages();
             // shows the current image
-            this._initSlide().then((resolve) => {
+            this._showCurrentImage().then((resolve) => {
                 // after showing them, inits the corresponding dot
                 this._initDotsNavigation();
             });
@@ -42,24 +42,30 @@ class Slider {
             // hides all the images
             this._hideSliderImages();
             // shows the current image
-            this._initSlide().then((resolve) => {
+            this._showCurrentImage().then((resolve) => {
                 // after showing them, inits the corresponding dot
                 this._initDotsNavigation();
             });
         });
 
         // dots navigation
-        this.dotsNavigation.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                // hides all the images
-                this._hideSliderImages();
-                // only shows the one we want
-                this.sliderImages[i].classList.add('active');
-            });
-        });
+        // this.dotsNavigation.forEach((dot, i) => {
+        //     dot.addEventListener('click', () => {
+        //         // hides all the images
+        //         this._hideSliderImages();
+        //         // only shows the one we want
+        //         this.sliderImages[i].classList.add('active');
+        //     });
+        // });
     }
 
-    _initSlide = () => {
+    /**
+     * The image shown will always be the first element in the slider
+     * in this case the element with the index 0
+     * @returns {Promise<unknown>}
+     * @private
+     */
+    _showCurrentImage = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.sliderImages[0].classList.add('active');
@@ -68,6 +74,12 @@ class Slider {
         });
     }
 
+    /**
+     * Creates a clone depending on which button
+     * the user clicked on
+     * @param direction
+     * @private
+     */
     _createSlide = (direction) => {
         switch (direction) {
             case this.direction.previous:
@@ -80,6 +92,9 @@ class Slider {
         }
     }
 
+    /**
+     * @private
+     */
     _createPreviousSlide = () => {
         const LAST_SLIDE         = this.sliderImages.length - 1;
         const NEW_PREVIOUS_SLIDE = this.sliderImages[LAST_SLIDE].cloneNode(true);
@@ -90,6 +105,9 @@ class Slider {
         this._updateSliderImages();
     }
 
+    /**
+     * @private
+     */
     _createNextSlide = () => {
         const FIRST_SLIDE    = 0;
         const NEW_LAST_SLIDE = this.sliderImages[FIRST_SLIDE].cloneNode(true);
@@ -104,6 +122,10 @@ class Slider {
         this.sliderImages = this.slider.querySelectorAll('img');
     }
 
+    /**
+     * Hides all the images
+     * @private
+     */
     _hideSliderImages = () => {
         this.sliderImages.forEach(sliderImage => {
             if (sliderImage.classList.contains('active')) {
@@ -112,6 +134,10 @@ class Slider {
         });
     }
 
+    /**
+     * Activates the dot corresponding to the current image
+     * @private
+     */
     _initDotsNavigation = () => {
         this.sliderImages.forEach((sliderImage, i) => {
             this.dotsNavigation[i].classList.remove('active');

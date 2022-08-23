@@ -15,8 +15,12 @@ class SkillType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('level')
             ->add('image', FileType::class, [
                 'label' => 'Image (.png .jpeg)',
+                'attr' => [
+                    'onchange' => 'new MyCropper()'
+                ],
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
                 // optional so I don't have to re-upload the PDF file
@@ -35,7 +39,6 @@ class SkillType extends AbstractType
                     ])
                 ]
             ])
-            ->add('level')
         ;
     }
 

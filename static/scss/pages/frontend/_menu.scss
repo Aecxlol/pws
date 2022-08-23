@@ -8,8 +8,9 @@ body.front-body {
   }
 
   &.login {
+    overflow: hidden;
 
-    header {
+    header, footer {
       display: none;
     }
   }

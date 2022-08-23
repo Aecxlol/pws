@@ -1,0 +1,24 @@
+body.path-admin-skills-create {
+
+  form#add-skill-form {
+
+    div.options-container {
+
+      div.crop-image-yn {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+
+      div.crop-choices-btn {
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+}

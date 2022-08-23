@@ -7,9 +7,6 @@
 
     <div class="admin-sub-content">
         <h3 class="white">Ajouter un projet</h3>
-        {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
-        <div>
-            <img id="image" src="{{ asset('img/logo/logo.jpg') }}">
-        </div>
+        {{ include('/admin/partials/_form.html.twig', { btnTextContent: 'Ajouter' }) }}
     </div>
 {% endblock %}

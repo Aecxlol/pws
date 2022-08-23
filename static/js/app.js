@@ -1,25 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /**
-     * @type {HTMLElement}
-     */
+    /** @type {HTMLElement} */
     const BODY = document.body;
 
-    /* FRONTEND */
+    //================ FRONTEND ================//
     if (BODY.classList.contains('front-body')) {
+        // Portfolio specific project details
         if (BODY.classList.contains('single-project')) {
             new Slider(BODY);
         } else {
             new Scroller();
             new TypeWriter();
+            new SortSkills(BODY);
         }
     }
 
-    /* ADMIN */
+    //================ ADMIN ================//
     if (BODY.classList.contains('admin-body')) {
-        // new MyCropper();
-        /* USERS AND SKILLS PAGES */
+        /* USERS AND SKILLS PAGES SHOW*/
         if (BODY.classList.contains('path-admin-users') || BODY.classList.contains('path-admin-skills')) {
             new EditDeletePopupManager();
+        }
+
+        /* SKILLS AND PROJECTS PAGES CREATE */
+        if (BODY.classList.contains('path-admin-projects-create') || BODY.classList.contains('path-admin-skills-create')) {
+            // new MyCropper(BODY);
         }
 
         /* SKILLS PAGE */

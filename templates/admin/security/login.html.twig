@@ -35,7 +35,10 @@
 {#                </label>#}
 {#            </div>#}
 
-            <button class="generic-blue-button" type="submit">Connexion</button>
+            <button class="generic-blue-button login-btn" type="submit">Connexion</button>
         </form>
+        <div class="waves-container">
+            {{ include('/admin/partials/_waves.html.twig') }}
+        </div>
     </div>
 {% endblock %}

@@ -17,15 +17,17 @@
 @use "components/_admin_form";
 
 //================= LAYOUT =================//
-// admin
+//==== admin ====//
 @use "layout/admin/_structure" as AdminLayout;
-// frontend
+//==== frontend ====//
 @use "layout/frontend/_structure";
 
 //================= PAGES =================//
-// admin
-@use "pages/admin/_skills" as AdminPages;
-// frontend
+//==== admin ====//
+/* SKILLS */
+@use "pages/admin/skills/_show";
+@use "pages/admin/skills/_create";
+//==== frontend ====//
 @use "pages/frontend/_main";
 @use "pages/frontend/_about";
 @use "pages/frontend/_skills";

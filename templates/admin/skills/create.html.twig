@@ -8,7 +8,7 @@
     </div>
 
     <div class="admin-sub-content">
-        <h5>Ajouter une compétence</h5>
-        {{ include('/admin/partials/_user_create_update_form.html.twig', { btnTextContent: 'Ajouter' }) }}
+        <h3 class="white">Ajouter une compétence</h3>
+        {{ include('/admin/partials/_form.html.twig', { src: 'skills', btnTextContent: 'Ajouter' }) }}
     </div>
 {% endblock %}

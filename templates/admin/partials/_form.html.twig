@@ -1,0 +1,23 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': 'add-skill-form'}}) }}
+    {{ form_widget(form) }}
+    {% if src is defined %}
+        <div class="options-container" id="options-container">
+            <template id="crop-image-yn-template">
+                <p class="white">Cropper l'image ?</p>
+                <button id="crop-btn-yes">Oui</button>
+                <button id="crop-btn-no">Non</button>
+            </template>
+
+            <template id="crop-options-btn-template">
+                <button id="crop-options-btn">Cropper</button>
+                <button id="reset-options-btn">Reset</button>
+                <button id="cancel-options-btn">Annuler</button>
+            </template>
+
+            <div class="crop-image-yn-container"></div>
+
+            <div class="crop-options-btn-container"></div>
+        </div>
+    {% endif %}
+    <button type="submit" class="generic-blue-button" id="add-skill-btn">{{ btnTextContent }}</button>
+{{ form_end(form) }}

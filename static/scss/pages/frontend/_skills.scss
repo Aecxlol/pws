@@ -20,7 +20,7 @@ section.skills-section {
       border: 1px solid #002c58;
       transition: color .3s, background-color .3s;
 
-      &:hover {
+      &:hover, &.active {
         background-color: #002c58;
         color: white;
       }
