@@ -4,7 +4,7 @@ body.path-admin-skills-create {
 
     div.options-container {
 
-      div.crop-image-yn {
+      div.crop-image-yn-container {
         display: none;
 
         &.active {
@@ -12,11 +12,43 @@ body.path-admin-skills-create {
         }
       }
 
-      div.crop-choices-btn {
+      div.crop-options-btn-container {
         display: none;
+        background-color: #416183;
+        padding: 25px;
 
         &.active {
           display: block;
+        }
+
+        div.crop-options {
+          flex-direction: row;
+          justify-content: space-around;
+
+          div {
+
+            label {
+              text-align: center;
+            }
+
+            input {
+              border: none;
+              text-align: center;
+              font-size: 20px;
+              background-color: #233446;
+            }
+          }
+        }
+
+        div.btn-container {
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          margin-bottom: 0;
+
+          button {
+            margin: 0 5px;
+          }
         }
       }
     }

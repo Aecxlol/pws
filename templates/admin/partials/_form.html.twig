@@ -4,14 +4,35 @@
         <div class="options-container" id="options-container">
             <template id="crop-image-yn-template">
                 <p class="white">Cropper l'image ?</p>
-                <button id="crop-btn-yes">Oui</button>
-                <button id="crop-btn-no">Non</button>
+                <button id="crop-btn-yes" class="generic-blue-button">Oui</button>
+                <button id="crop-btn-no" class="generic-blue-button">Non</button>
             </template>
 
             <template id="crop-options-btn-template">
-                <button id="crop-options-btn">Cropper</button>
-                <button id="reset-options-btn">Reset</button>
-                <button id="cancel-options-btn">Annuler</button>
+                <div class="crop-options">
+                    <div>
+                        <label for="width">Width (px)</label>
+                        <input type="number" name="width" id="width" readonly>
+                    </div>
+                    <div>
+                        <label for="height">Height (px)</label>
+                        <input type="number" name="height" id="height" readonly>
+                    </div>
+                    <div>
+                        <label for="x-pos">X position (px)</label>
+                        <input type="number" name="x-pos" id="x-pos" readonly>
+                    </div>
+                    <div>
+                        <label for="y-pos">Y position (px)</label>
+                        <input type="number" name="y-pos" id="y-pos" readonly>
+                    </div>
+
+                </div>
+                <div class="btn-container">
+                    <button id="crop-options-btn" class="generic-blue-button">Cropper</button>
+                    <button id="reset-options-btn" class="generic-blue-button">Reset</button>
+                    <button id="cancel-options-btn" class="generic-blue-button">Annuler</button>
+                </div>
             </template>
 
             <div class="crop-image-yn-container"></div>

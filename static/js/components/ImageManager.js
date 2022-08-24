@@ -2,7 +2,7 @@
  * We are in the change event on the file input
  * SkillType.php to see the details
  */
-class MyCropper {
+class ImageManager {
     constructor() {
         this.body             = document.body;
         this.form             = this.body.querySelector('form#add-skill-form');
@@ -11,6 +11,18 @@ class MyCropper {
         this.optionsContainer = this.body.querySelector('#options-container');
         this.newImage         = null;
         this.cropper          = null;
+
+        /* container that contains the yes / no question */
+        this.cropQuestionContainer = this.body.querySelector('div.crop-image-yn-container');
+
+        /* container that contains all the crop infos */
+        this.cropOptionsContainer       = this.body.querySelector('div.crop-options-btn-container');
+        this.cropOptionsContainerInputs = {
+            width: null,
+            height: null,
+            xPos: null,
+            yPos: null,
+        }
 
         this.init();
     }
@@ -32,7 +44,7 @@ class MyCropper {
         if (file) {
             reader.readAsDataURL(file);
         }
-
+        console.log("mdr : ", file);
         reader.addEventListener('load', (e) => {
             // get the url
             let imageUrl = e.target.result;
@@ -56,7 +68,7 @@ class MyCropper {
      * @private
      */
     _resize = (e, image) => {
-        const RESIZED_IMAGE_WIDTH = 600;
+        const RESIZED_IMAGE_WIDTH = 900;
         let canvas                = document.createElement('canvas');
         let ctx                   = canvas.getContext('2d');
         let ratio                 = RESIZED_IMAGE_WIDTH / e.target.width;
@@ -88,48 +100,63 @@ class MyCropper {
      * @private
      */
     _showCropQuestion = () => {
-        const CROP_QUESTION_TEMPLATE  = this.body.querySelector('template#crop-image-yn-template');
-        const CROP_QUESTION_CONTAINER = this.body.querySelector('div.crop-image-yn-container');
-
+        const CROP_QUESTION_TEMPLATE = this.body.querySelector('template#crop-image-yn-template');
 
         // copy the content of the template only if there is nothing in the destination container
         // this is made in case of the user decides to change his image
         // otherwise, each time he will change his image, the content will be cloned and added
-        if (CROP_QUESTION_CONTAINER.childElementCount === 0) {
-            const CONTENT                 = CROP_QUESTION_TEMPLATE.content.cloneNode(true);
-            CROP_QUESTION_CONTAINER.classList.add('active');
-            CROP_QUESTION_CONTAINER.append(CONTENT);
+        if (this.cropQuestionContainer.childElementCount === 0) {
+            const CONTENT = CROP_QUESTION_TEMPLATE.content.cloneNode(true);
+            this.cropQuestionContainer.classList.add('active');
+            this.cropQuestionContainer.append(CONTENT);
         }
 
         // handle the yes or no
-        this._handleCropQuestionChoice(CROP_QUESTION_CONTAINER);
+        this._handleCropQuestionChoice();
     }
 
     /**
-     * @param containerChoices
+     * yes / no choices
      * @private
      */
-    _handleCropQuestionChoice = (containerChoices) => {
+    _handleCropQuestionChoice = () => {
         const YES_BTN = this.body.querySelector('button#crop-btn-yes');
         const NO_BTN  = this.body.querySelector('button#crop-btn-no');
 
         YES_BTN.addEventListener('click', (e) => {
             e.preventDefault();
+            let classObj = this;
             // hide the container choices yes / no
-            containerChoices.classList.remove('active');
+            this.cropQuestionContainer.classList.remove('active');
             // show the crop options container
             this._showCropOptions();
+            this._updateCropOptionsContainerObj();
             // show the cropper
             this.cropper = new Cropper(this.newImage, {
                 aspectRatio: 1,
+                crop(e) {
+                    classObj._updateCropOptionsInfos(e);
+                }
+
             })
         });
 
         NO_BTN.addEventListener('click', (e) => {
             e.preventDefault();
             // hide the container choices yes / no
-            containerChoices.classList.remove('active');
+            this.cropQuestionContainer.classList.remove('active');
         });
+    }
+
+    /**
+     * @param e
+     * @private
+     */
+    _updateCropOptionsInfos = (e) => {
+        this.cropOptionsContainerInputs.width.value  = Math.trunc(e.detail.width);
+        this.cropOptionsContainerInputs.height.value = Math.trunc(e.detail.height);
+        this.cropOptionsContainerInputs.xPos.value   = Math.trunc(e.detail.x);
+        this.cropOptionsContainerInputs.yPos.value   = Math.trunc(e.detail.y);
     }
 
     /**
@@ -140,6 +167,7 @@ class MyCropper {
         const CROP_OPTIONS_CONTAINER = this.body.querySelector('div.crop-options-btn-container');
         const CONTENT                = CROP_OPTIONS_TEMPLATE.content.cloneNode(true);
 
+        // this prevents to append everytime the user changes the image
         if (CROP_OPTIONS_CONTAINER.childElementCount === 0) {
             CROP_OPTIONS_CONTAINER.classList.add('active');
             CROP_OPTIONS_CONTAINER.append(CONTENT);
@@ -148,24 +176,41 @@ class MyCropper {
         this._handleCropOptionsChoice(CROP_OPTIONS_CONTAINER);
     }
 
+    _updateCropOptionsContainerObj = () => {
+        this.cropOptionsContainerInputs.width  = this.cropOptionsContainer.querySelector('input#width');
+        this.cropOptionsContainerInputs.height = this.cropOptionsContainer.querySelector('input#height');
+        this.cropOptionsContainerInputs.xPos   = this.cropOptionsContainer.querySelector('input#x-pos');
+        this.cropOptionsContainerInputs.yPos   = this.cropOptionsContainer.querySelector('input#y-pos');
+    }
+
     /**
      * @private
      */
     _handleCropOptionsChoice = (containerOptions) => {
-        const CROP_BTN = this.body.querySelector('button#crop-options-btn');
-        const RESET_BTN = this.body.querySelector('button#reset-options-btn');
+        const CROP_BTN   = this.body.querySelector('button#crop-options-btn');
+        const RESET_BTN  = this.body.querySelector('button#reset-options-btn');
         const CANCEL_BTN = this.body.querySelector('button#cancel-options-btn');
 
         CROP_BTN.addEventListener('click', (e) => {
             e.preventDefault();
+            let lol = this.cropper.getCroppedCanvas().toDataURL();
+            let img = document.createElement('img');
+            img.src = lol;
+            this.body.append(img)
+            console.log(img);
         });
 
         RESET_BTN.addEventListener('click', (e) => {
             e.preventDefault();
+            this.cropper.reset();
         });
 
         CANCEL_BTN.addEventListener('click', (e) => {
             e.preventDefault();
+            this.cropper.destroy();
+            this._removeAllChildNodes(this.cropOptionsContainer);
+            this.cropOptionsContainer.classList.remove('active');
+            this.cropQuestionContainer.classList.add('active');
         });
     }
 
@@ -179,6 +224,16 @@ class MyCropper {
 
         if (thereIsMoreThanOneImage) {
             this.optionsContainer.removeChild(images[0]);
+        }
+    }
+
+    /**
+     * @param parent
+     * @private
+     */
+    _removeAllChildNodes = (parent) => {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
         }
     }
 }

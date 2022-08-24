@@ -19,7 +19,7 @@ class SkillType extends AbstractType
             ->add('image', FileType::class, [
                 'label' => 'Image (.png .jpeg)',
                 'attr' => [
-                    'onchange' => 'new MyCropper()'
+                    'onchange' => 'new ImageManager()'
                 ],
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
