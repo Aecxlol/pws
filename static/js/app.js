@@ -21,11 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             new EditDeletePopupManager();
         }
 
-        /* SKILLS AND PROJECTS PAGES CREATE */
-        if (BODY.classList.contains('path-admin-projects-create') || BODY.classList.contains('path-admin-skills-create')) {
-            // new MyCropper(BODY);
-        }
-
         /* SKILLS PAGE */
         if (BODY.classList.contains('path-admin-skills')) {
             new SkillsOrderManager();

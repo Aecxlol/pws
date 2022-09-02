@@ -7,13 +7,15 @@ use App\Form\Type\SkillType;
 use App\Helper\Helper;
 use App\Repository\SkillRepository;
 use App\Service\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
+use Intervention\Image\Exception\NotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class SkillsCRUDController extends AbstractController
 {
@@ -25,11 +27,10 @@ class SkillsCRUDController extends AbstractController
     /**
      * @param SkillRepository $skillRepository
      * @param RequestStack $requestStack
-     * @param SluggerInterface $slugger
      */
-    public function __construct(private SkillRepository $skillRepository, private RequestStack $requestStack, private SluggerInterface $slugger)
+    public function __construct(private SkillRepository $skillRepository, private RequestStack $requestStack)
     {
-        $this->currentPage  = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
+        $this->currentPage = Helper::getPageName($this->requestStack->getCurrentRequest()->getPathInfo());
     }
 
     /**
@@ -48,33 +49,14 @@ class SkillsCRUDController extends AbstractController
 
     /**
      * @param Request $request
-     * @param FileUploader $fileUploader
      * @return Response
      */
     #[Route('/admin/skills/create', name: 'app_admin_skills_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, FileUploader $fileUploader): Response
+    public function create(Request $request): Response
     {
         $skill = new Skill();
         $form  = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $skillImage */
-            $skillImage = $form->get('image')->getData();
-
-            # this condition is mandatory since the image field is not required
-            if ($skillImage) {
-                $skillImageName = $fileUploader->upload($skillImage);
-                $skill->setImage($skillImageName);
-                $skill->setDisplayOrder(0);
-                $skill = $form->getData();
-
-                $this->skillRepository->add($skill, flush: true);
-                $this->addFlash('success', "La compétence <strong>{$skill->getName()}</strong> a bien été ajoutée");
-
-                return $this->redirectToRoute('app_admin_skills');
-            }
-        }
 
         return $this->renderForm('admin/skills/create.html.twig', [
             'form' => $form,
@@ -92,7 +74,7 @@ class SkillsCRUDController extends AbstractController
     public function update(int $id, Request $request): Response
     {
         $skill = $this->skillRepository->findOneBy(compact('id'));
-        $form = $this->createForm(SkillType::class, $skill);
+        $form  = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -141,5 +123,38 @@ class SkillsCRUDController extends AbstractController
         $this->skillRepository->add($skill, flush: true);
 
         return $this->redirectToRoute('app_admin_skills');
+    }
+
+
+    /**
+     * @param Request $request
+     * @param FileUploader $fileUploader
+     * @return Response
+     */
+    #[Route('/admin/skills/image', name: 'app_admin_skills_image', methods: ['GET', 'POST'])]
+    public function getImage(Request $request, FileUploader $fileUploader): Response
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new NotFoundException();
+        }
+
+        $skill = new Skill();
+        $form  = $this->createForm(SkillType::class, $skill);
+        $form->handleRequest($request);
+
+        /** @var $file */
+        $file = $_FILES['file'];
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            # this condition is mandatory since the image field is not required
+            $file = new UploadedFile($file['tmp_name'], $file['name'], $file['type']);
+
+            $skillImageName = $fileUploader->upload($file);
+            $skill->setImage($skillImageName);
+            $this->skillRepository->add($skill, flush: true);
+        }
+
+        return new Response('done');
     }
 }

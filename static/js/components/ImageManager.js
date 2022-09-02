@@ -4,31 +4,34 @@
  */
 class ImageManager {
     constructor() {
-        this.body             = document.body;
-        this.form             = this.body.querySelector('form#add-skill-form');
-        this.addSkillBtn      = this.form.querySelector('#add-skill-btn');
-        this.fileInput        = this.body.querySelector('#skill_image');
-        this.optionsContainer = this.body.querySelector('#options-container');
-        this.newImage         = null;
-        this.cropper          = null;
+        this.body                = document.body;
+        this.form                = this.body.querySelector('form#add-skill-form');
+        this.submitBtn           = this.form.querySelector('button.submit-btn');
+        this.fileInput           = this.body.querySelector('#skill_image');
+        this.optionsContainer    = this.body.querySelector('#options-container');
+        this.resizedImageElement = null;
+        this.resizedImageFile    = null;
+        this.resizedImageAttr    = {
+            width: 900,
+            height: 0
+        }
+        this.cropper             = null;
 
         /* container that contains the yes / no question */
         this.cropQuestionContainer = this.body.querySelector('div.crop-image-yn-container');
 
-        /* container that contains all the crop infos */
-        this.cropOptionsContainer       = this.body.querySelector('div.crop-options-btn-container');
-        this.cropOptionsContainerInputs = {
-            width: null,
-            height: null,
-            xPos: null,
-            yPos: null,
-        }
+        /**
+         * CANVAS RELATED
+         */
+        this.canvas = null;
+        this.ctx = null
 
         this.init();
     }
 
     init = () => {
         this._previewFile();
+        this._handleFormSubmission();
     }
 
     /**
@@ -44,7 +47,7 @@ class ImageManager {
         if (file) {
             reader.readAsDataURL(file);
         }
-        console.log("mdr : ", file);
+
         reader.addEventListener('load', (e) => {
             // get the url
             let imageUrl = e.target.result;
@@ -68,26 +71,32 @@ class ImageManager {
      * @private
      */
     _resize = (e, image) => {
-        const RESIZED_IMAGE_WIDTH = 900;
-        let canvas                = document.createElement('canvas');
-        let ctx                   = canvas.getContext('2d');
-        let ratio                 = RESIZED_IMAGE_WIDTH / e.target.width;
-        let resizedImgUrl         = null;
+        this.canvas                  = document.createElement('canvas');
+        this.ctx                     = this.canvas.getContext('2d');
+        let originalImageWidth       = e.target.width
+        let aspectRatio              = this.resizedImageAttr.width / originalImageWidth;
+        this.resizedImageAttr.height = e.target.height * aspectRatio;
+        let resizedImgUrl            = null;
 
-        canvas.width  = RESIZED_IMAGE_WIDTH;
-        canvas.height = e.target.height * ratio;
+        this.canvas.width  = this.resizedImageAttr.width;
+        this.canvas.height = this.resizedImageAttr.height;
 
         // draw the image in the canvas
-        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        this.ctx.drawImage(image, 0, 0, this.canvas.width, this.canvas.height);
 
         // get the url of the resized image
-        resizedImgUrl = ctx.canvas.toDataURL();
+        resizedImgUrl = this.ctx.canvas.toDataURL();
 
-        this.newImage = document.createElement('img');
-        this.newImage.setAttribute('alt', 'aperçu de l\'image');
-        this.newImage.src = resizedImgUrl;
+        this.resizedImageElement = document.createElement('img');
+        this.resizedImageElement.setAttribute('alt', 'aperçu de l\'image redimensionnée');
+        this.resizedImageElement.setAttribute('class', 'resized-image');
+        this.resizedImageElement.src = resizedImgUrl;
 
-        this.optionsContainer.append(this.newImage);
+        /**
+         * @todo récup la size de l'image
+         * */
+
+        this.optionsContainer.append(this.resizedImageElement);
 
         // show if you want to crop the image or not
         this._showCropQuestion();
@@ -122,23 +131,17 @@ class ImageManager {
     _handleCropQuestionChoice = () => {
         const YES_BTN = this.body.querySelector('button#crop-btn-yes');
         const NO_BTN  = this.body.querySelector('button#crop-btn-no');
+        let modal     = new Modal(this.body, this.resizedImageElement, this.resizedImageAttr);
 
         YES_BTN.addEventListener('click', (e) => {
             e.preventDefault();
-            let classObj = this;
-            // hide the container choices yes / no
-            this.cropQuestionContainer.classList.remove('active');
-            // show the crop options container
-            this._showCropOptions();
-            this._updateCropOptionsContainerObj();
-            // show the cropper
-            this.cropper = new Cropper(this.newImage, {
-                aspectRatio: 1,
-                crop(e) {
-                    classObj._updateCropOptionsInfos(e);
-                }
-
-            })
+            if (!modal.isActive) {
+                this.optionsContainer.removeChild(this.resizedImageElement);
+                modal.init();
+                setTimeout(() => {
+                    modal.show();
+                }, 200);
+            }
         });
 
         NO_BTN.addEventListener('click', (e) => {
@@ -148,71 +151,6 @@ class ImageManager {
         });
     }
 
-    /**
-     * @param e
-     * @private
-     */
-    _updateCropOptionsInfos = (e) => {
-        this.cropOptionsContainerInputs.width.value  = Math.trunc(e.detail.width);
-        this.cropOptionsContainerInputs.height.value = Math.trunc(e.detail.height);
-        this.cropOptionsContainerInputs.xPos.value   = Math.trunc(e.detail.x);
-        this.cropOptionsContainerInputs.yPos.value   = Math.trunc(e.detail.y);
-    }
-
-    /**
-     * @private
-     */
-    _showCropOptions = () => {
-        const CROP_OPTIONS_TEMPLATE  = this.body.querySelector('template#crop-options-btn-template');
-        const CROP_OPTIONS_CONTAINER = this.body.querySelector('div.crop-options-btn-container');
-        const CONTENT                = CROP_OPTIONS_TEMPLATE.content.cloneNode(true);
-
-        // this prevents to append everytime the user changes the image
-        if (CROP_OPTIONS_CONTAINER.childElementCount === 0) {
-            CROP_OPTIONS_CONTAINER.classList.add('active');
-            CROP_OPTIONS_CONTAINER.append(CONTENT);
-        }
-
-        this._handleCropOptionsChoice(CROP_OPTIONS_CONTAINER);
-    }
-
-    _updateCropOptionsContainerObj = () => {
-        this.cropOptionsContainerInputs.width  = this.cropOptionsContainer.querySelector('input#width');
-        this.cropOptionsContainerInputs.height = this.cropOptionsContainer.querySelector('input#height');
-        this.cropOptionsContainerInputs.xPos   = this.cropOptionsContainer.querySelector('input#x-pos');
-        this.cropOptionsContainerInputs.yPos   = this.cropOptionsContainer.querySelector('input#y-pos');
-    }
-
-    /**
-     * @private
-     */
-    _handleCropOptionsChoice = (containerOptions) => {
-        const CROP_BTN   = this.body.querySelector('button#crop-options-btn');
-        const RESET_BTN  = this.body.querySelector('button#reset-options-btn');
-        const CANCEL_BTN = this.body.querySelector('button#cancel-options-btn');
-
-        CROP_BTN.addEventListener('click', (e) => {
-            e.preventDefault();
-            let lol = this.cropper.getCroppedCanvas().toDataURL();
-            let img = document.createElement('img');
-            img.src = lol;
-            this.body.append(img)
-            console.log(img);
-        });
-
-        RESET_BTN.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.cropper.reset();
-        });
-
-        CANCEL_BTN.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.cropper.destroy();
-            this._removeAllChildNodes(this.cropOptionsContainer);
-            this.cropOptionsContainer.classList.remove('active');
-            this.cropQuestionContainer.classList.add('active');
-        });
-    }
 
     /**
      * @private
@@ -227,13 +165,28 @@ class ImageManager {
         }
     }
 
-    /**
-     * @param parent
-     * @private
-     */
-    _removeAllChildNodes = (parent) => {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
+    _handleFormSubmission = () => {
+        this.submitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            let url  = this.form.querySelector('div#options-container').dataset.url;
+            let data = new FormData(this.form);
+
+            // if the image got cropped then blob it, otherwise blob the resized image
+            let finalFile = this.cropper ? this.cropper.getCroppedCanvas() : this.ctx.canvas;
+
+            finalFile.toBlob((blob) => {
+                let fileName = 'bbbb'
+                data.append('file', blob, fileName);
+
+                const HTTP = new Http();
+
+                HTTP.ajax({method: 'POST', url: url, data: data, async: true}).then((response) => {
+                    console.log(response);
+                }).catch((error) => {
+                    console.error(error.status, error.statusText)
+                });
+            });
+
+        });
     }
 }

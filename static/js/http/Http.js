@@ -4,7 +4,8 @@ class Http {
         let _config = {
             method: config.method,
             url: config.url,
-            async: config.async
+            data: config.data ?? '',
+            async: config.async,
         };
 
         const REQUEST = new XMLHttpRequest();
@@ -23,7 +24,8 @@ class Http {
             }
 
             REQUEST.open(_config.method, _config.url, _config.async);
-            REQUEST.send();
+            REQUEST.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            REQUEST.send(_config.data);
         });
     }
 }

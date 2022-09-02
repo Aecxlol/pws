@@ -71,7 +71,7 @@ class Skill
         return $this->displayOrder;
     }
 
-    public function setDisplayOrder(int $displayOrder): self
+    public function setDisplayOrder(int $displayOrder = 0): self
     {
         $this->displayOrder = $displayOrder;
 

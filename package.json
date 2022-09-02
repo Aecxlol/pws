@@ -6,6 +6,8 @@
   "devDependencies": {
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
+    "@hotwired/stimulus": "^3.0.0",
+    "@symfony/ux-cropperjs": "file:vendor/symfony/ux-cropperjs/Resources/assets",
     "autoprefixer": "^10.4.8",
     "browser-sync": "^2.27.10",
     "gulp": "^4.0.2",
@@ -28,6 +30,6 @@
   "author": "Damien A. damienweb062@gmail.com https://damienweb062.com",
   "license": "ISC",
   "dependencies": {
-    "cropperjs": "^1.5.12"
+    "cropperjs": "^1.5.9"
   }
 }

@@ -12,7 +12,7 @@ body.path-admin-skills-create {
         }
       }
 
-      div.crop-options-btn-container {
+      div.crop-options-container {
         display: none;
         background-color: #416183;
         padding: 25px;
@@ -21,23 +21,39 @@ body.path-admin-skills-create {
           display: block;
         }
 
-        div.crop-options {
-          flex-direction: row;
-          justify-content: space-around;
+        div.img-infos, div.crop-options {
 
-          div {
+          h4 {
+            margin: 0 0 30px;
+            font-size: 25px;
+          }
 
-            label {
-              text-align: center;
-            }
+          div.img-infos-label-input-container {
+            flex-direction: row;
+            justify-content: space-around;
 
-            input {
-              border: none;
-              text-align: center;
-              font-size: 20px;
-              background-color: #233446;
+            div {
+
+              label {
+                text-align: center;
+              }
+
+              input {
+                border: none;
+                text-align: center;
+                font-size: 20px;
+                background-color: #233446;
+              }
             }
           }
+        }
+
+        hr {
+          margin-bottom: 20px;
+          border: 0;
+          height: 0;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         div.btn-container {
